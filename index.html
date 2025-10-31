@@ -131,7 +131,6 @@
       transition: transform 0.3s ease, filter 0.3s ease;
       margin-bottom: 16px;
     }
-    
     .logo-float img:hover {
       transform: scale(1.05);
       filter: drop-shadow(0 15px 50px rgba(14,165,255,0.4));
@@ -146,7 +145,6 @@
       font-weight: 800;
       text-shadow: 0 2px 20px rgba(14,165,255,0.3);
     }
-
     .hero-left p.lead {
       margin: 0 0 20px 0;
       color: var(--muted);
@@ -172,9 +170,7 @@
     .btn:hover{transform:translateY(-2px);box-shadow: 0 12px 32px rgba(14,165,255,0.25)}
     .btn-ghost:hover{background:rgba(255,255,255,0.04)}
 
-    .hero-right{
-      display:flex;flex-direction:column;gap:16px;
-    }
+    .hero-right{display:flex;flex-direction:column;gap:16px}
     .hero-card{
       background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
       border-radius:16px;padding:24px;border:1px solid rgba(255,255,255,0.06);
@@ -183,9 +179,7 @@
     .hero-card h4{margin:0 0 10px 0;color:var(--glow-blue);font-size:16px}
     .hero-card p{margin:0;color:var(--muted);font-size:14px;line-height:1.6}
 
-    .badge-grid{
-      display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;
-    }
+    .badge-grid{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
     .badge{
       padding:8px 14px;border-radius:8px;background:rgba(255,255,255,0.03);
       border:1px solid rgba(255,255,255,0.05);font-weight:700;
@@ -200,116 +194,122 @@
       position: relative;
       overflow: hidden;
     }
-    
     .section-card::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       height: 3px;
       background: linear-gradient(90deg, transparent, var(--glow-blue), transparent);
       opacity: 0.5;
     }
 
-    h2{
-      margin:0 0 8px 0;
-      font-size:26px;color:var(--white);
-      font-weight:800;
-      text-shadow: 0 2px 15px rgba(14,165,255,0.2);
-    }
+    h2{margin:0 0 8px 0;font-size:26px;color:var(--white);font-weight:800;text-shadow:0 2px 15px rgba(14,165,255,0.2)}
     p.sub{color:var(--muted);margin:0 0 20px 0;font-size:15px;line-height:1.6}
 
+    /* SERVICES GRID */
     .services-grid{
-      display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;
-      margin-top:20px;
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:20px;
     }
     .service{
       border-radius:14px; overflow:hidden;
       background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
       border:1px solid rgba(255,255,255,0.04);
       transition: transform .3s cubic-bezier(.2,.9,.2,1), box-shadow .3s, border-color .3s;
-      display:flex;flex-direction:column;
-      position: relative;
+      display:flex;flex-direction:column; position: relative; height: 380px;
     }
-    .service::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+    .service::before{
+      content:''; position:absolute; inset:0;
       background: linear-gradient(135deg, rgba(14,165,255,0.08), rgba(30,64,175,0.04));
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
-      border-radius: 14px;
+      opacity: 0; transition: opacity 0.3s ease; pointer-events:none; border-radius:14px;
     }
-    .service:hover::before {
-      opacity: 1;
+    .service:hover::before{opacity:1}
+    .service:hover{transform:translateY(-6px) scale(1.01); box-shadow: 0 20px 60px rgba(14,165,255,0.25); border-color: rgba(14,165,255,0.25)}
+
+    /* Image fit in cards */
+    .service img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+      object-position:center top;
+      display:block;
+      border-bottom:1px solid rgba(255,255,255,0.05);
+      border-radius:12px 12px 0 0;
     }
-    .service:hover{
-      transform:translateY(-6px) scale(1.01);
-      box-shadow: 0 20px 60px rgba(14,165,255,0.25);
-      border-color: rgba(14,165,255,0.25);
-    }
-    .service img{width:100%;height:160px;object-fit:cover;display:block}
+    /* center lower rows a bit more */
+    .service:nth-child(n+4) img{object-position:center center}
+
     .svc-body{padding:18px;flex:1;display:flex;flex-direction:column}
     .svc-title{font-weight:800;margin:0 0 6px 0;color:var(--white);font-size:16px}
     .svc-price{color:var(--glow-blue);font-weight:800;margin-bottom:8px;font-size:15px}
     .svc-desc{color:var(--muted);font-size:13px;line-height:1.6;flex:1}
 
-    .feature-grid{
-      display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:20px;
-    }
-    .feature-card{
-      padding:18px;border-radius:12px;background:var(--card);border:1px solid rgba(255,255,255,0.04);
-      transition:all 0.3s ease;
-      position: relative;
-    }
-    .feature-card:hover{
-      background:var(--card-strong);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 28px rgba(14,165,255,0.12);
-      border-color: rgba(14,165,255,0.2);
-    }
+    /* FEATURES */
+    .feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:20px}
+    .feature-card{padding:18px;border-radius:12px;background:var(--card);border:1px solid rgba(255,255,255,0.04);transition:all .3s;position:relative}
+    .feature-card:hover{background:var(--card-strong);transform:translateY(-3px);box-shadow:0 10px 28px rgba(14,165,255,0.12);border-color:rgba(14,165,255,0.2)}
     .feature-icon{font-size:24px;margin-bottom:8px}
     .feature-title{font-weight:800;margin-bottom:5px;font-size:15px}
     .feature-desc{color:var(--muted);font-size:13px;line-height:1.6}
 
-    .alacarte-grid{
-      display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:18px;
+    /* ALA CARTE – premium mini-cards */
+    .alacarte-grid.pretty{
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:14px; margin-top:18px;
     }
     .alacarte-item{
-      padding:14px;border-radius:10px;background:var(--card);
-      border:1px solid rgba(255,255,255,0.04);font-weight:600;
-      text-align:center;font-size:13px;
-    }
-
-    .booking-wrap{
-      display:grid;grid-template-columns:1.5fr 1fr;gap:24px;align-items:start;margin-top:24px;
-    }
-    .form input,.form textarea,.form select{
-      width:100%;padding:11px 14px;border-radius:10px;
+      position:relative; display:flex; align-items:flex-start; gap:14px;
+      padding:16px; border-radius:14px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.025));
       border:1px solid rgba(255,255,255,0.06);
-      background:rgba(3,6,10,0.3);color:var(--white);
-      font-weight:600;margin-bottom:12px;font-size:14px;
+      box-shadow:0 10px 28px rgba(14,165,255,0.10);
+      transition:transform .25s, box-shadow .25s, border-color .25s;
+      overflow:hidden;
+    }
+    .alacarte-item::before{
+      content:''; position:absolute; inset:0;
+      background:radial-gradient(80% 120% at 0% 0%, rgba(14,165,255,0.12), transparent 60%);
+      opacity:.35; pointer-events:none;
+    }
+    .alacarte-item:hover{transform:translateY(-4px); box-shadow:0 18px 50px rgba(14,165,255,0.25); border-color:rgba(14,165,255,0.28)}
+    .alacarte-icon{flex-shrink:0; width:42px;height:42px; border-radius:12px; display:grid;place-items:center; color:#aee5ff;
+      background:linear-gradient(135deg, rgba(14,165,255,0.18), rgba(30,64,175,0.14));
+      border:1px solid rgba(14,165,255,0.35); box-shadow:0 8px 22px rgba(14,165,255,0.20) inset, 0 4px 16px rgba(14,165,255,0.15)
+    }
+    .alacarte-icon svg{width:22px;height:22px}
+    .alacarte-text{display:flex;flex-direction:column;gap:4px}
+    .alacarte-title{font-weight:800;font-size:15px;color:var(--white)}
+    .alacarte-desc{color:var(--muted);font-size:13px;letter-spacing:.2px}
+    .alacarte-note{margin-top:14px;padding:12px 14px;font-size:13px;color:var(--muted);background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.05);border-radius:10px}
+    .alacarte-note a{color:#e6f0ff;text-decoration:underline}
+    .alacarte-note a:hover{color:var(--glow-blue)}
+
+    /* GALLERY */
+    .gallery-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+      gap:16px; margin-top:20px;
+    }
+    .gallery-grid img{
+      width:100%; height:200px; object-fit:cover; border-radius:14px;
+      transition:transform .3s, box-shadow .3s; box-shadow:0 8px 20px rgba(14,165,255,0.1);
+      border:1px solid rgba(255,255,255,0.05);
+    }
+    .gallery-grid img:hover{transform:scale(1.05); box-shadow:0 12px 32px rgba(14,165,255,0.3); border-color:rgba(14,165,255,0.25)}
+
+    /* FORM / CONTACT */
+    .booking-wrap{display:grid;grid-template-columns:1.5fr 1fr;gap:24px;align-items:start;margin-top:24px}
+    .form input,.form textarea,.form select{
+      width:100%;padding:11px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);
+      background:rgba(3,6,10,0.3);color:var(--white);font-weight:600;margin-bottom:12px;font-size:14px;
     }
     .form label{display:block;margin-bottom:5px;color:var(--muted);font-size:13px;font-weight:600}
     .submit-big{
-      padding:14px;border-radius:10px;border:0;font-weight:800;
-      background:linear-gradient(135deg,var(--accent),var(--glow-blue));
-      color:#fff;cursor:pointer;width:100%;
-      box-shadow: 0 10px 30px rgba(14,165,255,0.2);
-      transition:all 0.2s ease;font-size:15px;
+      padding:14px;border-radius:10px;border:0;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--glow-blue));
+      color:#fff;cursor:pointer;width:100%; box-shadow: 0 10px 30px rgba(14,165,255,0.2); transition:all .2s;font-size:15px
     }
-    .submit-big:hover{transform:translateY(-2px);box-shadow: 0 12px 36px rgba(14,165,255,0.3)}
-
+    .submit-big:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(14,165,255,0.3)}
     .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px}
-    .contact-card{
-      display:flex;gap:14px;align-items:flex-start;padding:18px;border-radius:12px;
-      background:var(--card-strong);border:1px solid rgba(255,255,255,0.04);
-    }
+    .contact-card{display:flex;gap:14px;align-items:flex-start;padding:18px;border-radius:12px;background:var(--card-strong);border:1px solid rgba(255,255,255,0.04)}
     .contact-card svg{width:36px;height:36px;flex-shrink:0}
     .contact-title{font-weight:800;margin-bottom:5px;font-size:15px}
     .contact-detail{color:var(--muted);font-size:13px;line-height:1.6}
@@ -317,17 +317,8 @@
 
     footer{padding:32px 0;text-align:center;color:var(--muted);border-top:1px solid rgba(255,255,255,0.03)}
 
-    .fab{
-      position:fixed;right:24px;bottom:24px;z-index:9999;
-      display:flex;flex-direction:column;gap:12px;align-items:flex-end;
-    }
-    .fab a{
-      display:inline-flex;align-items:center;gap:10px;padding:12px 18px;
-      border-radius:12px;font-weight:700;
-      background:linear-gradient(135deg,var(--accent),var(--glow-blue));
-      color:#fff;box-shadow:0 10px 30px rgba(14,165,255,0.2);
-      text-decoration:none;transition:all 0.2s ease;font-size:14px;
-    }
+    .fab{position:fixed;right:24px;bottom:24px;z-index:9999;display:flex;flex-direction:column;gap:12px;align-items:flex-end}
+    .fab a{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:12px;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--glow-blue));color:#fff;box-shadow:0 10px 30px rgba(14,165,255,0.2);text-decoration:none;transition:.2s;font-size:14px}
     .fab a:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(14,165,255,0.3)}
 
     @media (max-width:1100px){
@@ -358,6 +349,7 @@
     </div>
 
     <div class="nav-links">
+      <a href="#gallery" class="nav-link">Gallery</a>
       <a href="#services" class="nav-link">Services</a>
       <a href="#booking" class="nav-link">Book</a>
       <a href="#contact" class="nav-link">Contact</a>
@@ -366,20 +358,16 @@
 
   <header class="hero">
     <div class="hero-panel wrap" style="background: transparent; box-shadow:none; border:0; text-align:center; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px 20px;">
-      
       <div class="logo-float" style="margin-bottom:0;">
         <img src="images/IslandShineLogo.png" alt="Island Shine logo">
       </div>
-
       <p class="lead" style="color:#2c3e50; max-width:700px; margin:0 auto 20px; font-size:16px; font-weight:500;">
         Premium auto detailing services for drivers who value quality. From quick maintenance to complete restoration with ceramic protection – we deliver exceptional results that last.
       </p>
-
       <div class="cta-row" style="justify-content:center;">
         <a href="#booking" class="btn btn-primary">Schedule Service</a>
         <a href="tel:+16716464569" class="btn btn-ghost" style="color:#0b0f14; border-color:rgba(0,0,0,0.15);">Call Us</a>
       </div>
-
       <div style="margin-top:16px; color:#555; font-weight:600; font-size:13px; max-width:800px;">
         Mon–Sat: 8:30-4:30 • Appointments Recommended • Walk-Ins Welcome • 743 Chalan San Antonio (Former Guam Greyhound Park), Tamuning
       </div>
@@ -387,6 +375,22 @@
   </header>
 
   <main class="wrap">
+    <!-- GALLERY at the top -->
+    <section id="gallery">
+      <div class="section-card">
+        <h2>Gallery</h2>
+        <p class="sub">See the Island Shine difference — real results from our detailing experts.</p>
+        <div class="gallery-grid">
+          <img src="images/gallery1.jpg" alt="Detailed BMW">
+          <img src="images/gallery2.jpg" alt="Interior Deep Clean">
+          <img src="images/gallery3.jpg" alt="Ceramic Coating Finish">
+          <img src="images/gallery4.jpg" alt="Wax and Polish">
+          <img src="images/gallery5.jpg" alt="Headlight Restoration">
+          <img src="images/gallery6.jpg" alt="Full Exterior Detail">
+        </div>
+      </div>
+    </section>
+
     <section>
       <div class="section-card">
         <h2>About Us</h2>
@@ -398,7 +402,6 @@
       <div class="section-card">
         <h2>Why Choose Us</h2>
         <p class="sub">Quality work backed by experience and the right tools for the job.</p>
-
         <div class="feature-grid">
           <div class="feature-card">
             <div class="feature-icon">🏆</div>
@@ -425,156 +428,191 @@
     </section>
 
     <section id="services">
-  <div class="section-card">
-    <h2>Our Packages</h2>
-    <p class="sub">Transparent pricing with packages designed for different needs and budgets.</p>
+      <div class="section-card">
+        <h2>Our Packages</h2>
+        <p class="sub">Transparent pricing with packages designed for different needs and budgets.</p>
 
-    <div class="services-grid">
-      <article class="service">
-        <img src="images/image_1.jpg" alt="Super Wash">
-        <div class="svc-body">
-          <div class="svc-title">Super Wash</div>
-          <div class="svc-price">From $75</div>
-          <details>
-            <summary style="cursor:pointer;color:var(--glow-blue);font-weight:600;margin-top:8px;">What's Included</summary>
-            <ul style="margin-top:8px;color:var(--muted);font-size:14px;line-height:1.6;list-style:none;padding-left:0;">
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Exterior Wash</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Interior Vacuum</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Light Interior Wipe Down</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Exterior & Interior Window Cleaning</li>
-            </ul>
-          </details>
+        <div class="services-grid">
+          <article class="service">
+            <img src="images/image_1.jpg" alt="Super Wash">
+            <div class="svc-body">
+              <div class="svc-title">Super Wash</div>
+              <div class="svc-price">From $75</div>
+              <details>
+                <summary style="cursor:pointer;color:var(--glow-blue);font-weight:600;margin-top:8px;">What's Included</summary>
+                <ul style="margin-top:8px;color:var(--muted);font-size:14px;line-height:1.6;list-style:none;padding-left:0;">
+                  <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Exterior Wash</li>
+                  <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Interior Vacuum</li>
+                  <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Light Interior Wipe Down</li>
+                  <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Exterior & Interior Window Cleaning</li>
+                </ul>
+              </details>
+            </div>
+          </article>
+
+          <article class="service">
+            <img src="images/image_2.jpg" alt="IShine">
+            <div class="svc-body">
+              <div class="svc-title">IShine</div>
+              <div class="svc-price">From $165</div>
+              <details>
+                <summary style="cursor:pointer;color:var(--glow-blue);font-weight:600;margin-top:8px;">What's Included</summary>
+                <ul style="margin-top:8px;color:var(--muted);font-size:14px;line-height:1.6;list-style:none;padding-left:0;">
+                  <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Exterior Wash</li>
+                  <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Undercarriage Cleaning</li>
+                  <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Door Jamb Cleaning</li>
+                  <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Deep Interior Vacuum</li>
+                  <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Exterior & Interior Window Cleaning</li>
+                  <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Vinyl/Leather UV Protectant Cream</li>
+                  <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Wheel & Tire Clean with Tire Shine</li>
+                  <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Carnauba Wax</li>
+                  <li><em>*Ceramic Spray additional $90.00</em></li>
+                </ul>
+              </details>
+            </div>
+          </article>
+
+          <article class="service">
+            <img src="images/image_3.jpg" alt="Deluxe">
+            <div class="svc-body">
+              <div class="svc-title">Deluxe</div>
+              <div class="svc-price">From $200</div>
+              <details>
+                <summary style="cursor:pointer;color:var(--glow-blue);font-weight:600;margin-top:8px;">What's Included</summary>
+                <ul style="margin-top:8px;color:var(--muted);font-size:14px;line-height:1.6;list-style:none;padding-left:0;">
+                  <li>✓ Exterior Wash</li><li>✓ Undercarriage Cleaning</li><li>✓ Door Jamb Cleaning</li>
+                  <li>✓ Deep Interior Vacuum</li><li>✓ Exterior & Interior Window Cleaning</li>
+                  <li>✓ Vinyl/Leather UV Protectant Cream</li><li>✓ Wheel & Tire Clean with Tire Shine</li>
+                  <li>✓ Engine Detailing</li><li><em>*RENEW Ceramic Spray Coating (Hyper Gloss) by System-X</em></li>
+                </ul>
+              </details>
+            </div>
+          </article>
+
+          <article class="service">
+            <img src="images/image_4.jpg" alt="Executive Interior">
+            <div class="svc-body">
+              <div class="svc-title">Executive Interior Detailing</div>
+              <div class="svc-price">From $245</div>
+              <details>
+                <summary style="cursor:pointer;color:var(--glow-blue);font-weight:600;margin-top:8px;">What's Included</summary>
+                <ul style="margin-top:8px;color:var(--muted);font-size:14px;line-height:1.6;list-style:none;padding-left:0;">
+                  <li>✓ Door Jamb Cleaning</li><li>✓ Deep Interior Vacuum</li><li>✓ Interior Window Cleaning</li>
+                  <li>✓ Vinyl/Leather UV Protectant Cream</li><li>✓ Interior Shampoo</li><li>✓ Extraction & Steam Clean</li>
+                  <li><strong>Free Exterior Wash</strong></li><li><em>*We do not guarantee stains can be removed</em></li>
+                </ul>
+              </details>
+            </div>
+          </article>
+
+          <article class="service">
+            <img src="images/image_5.jpg" alt="Executive Works">
+            <div class="svc-body">
+              <div class="svc-title">Executive Works Package</div>
+              <div class="svc-price">From $395</div>
+              <details>
+                <summary style="cursor:pointer;color:var(--glow-blue);font-weight:600;margin-top:8px;">What's Included</summary>
+                <ul style="margin-top:8px;color:var(--muted);font-size:14px;line-height:1.6;list-style:none;padding-left:0;">
+                  <li>✓ Exterior Wash & Wax</li><li>✓ Undercarriage Cleaning</li><li>✓ Exterior & Interior Windows</li>
+                  <li>✓ Vinyl/Leather Cleaning</li><li>✓ UV Protectant</li><li>✓ Wheel & Tire + Tire Shine</li>
+                  <li>✓ Interior Shampoo</li><li>✓ Extraction & Steam Clean</li><li>✓ Engine Detailing</li>
+                  <li>✓ Anti-Bacterial Treatment</li><li><em>*RENEW Ceramic Spray Coating (Hyper Gloss) by System-X</em></li>
+                  <li><em>**We do not guarantee stains can be removed</em></li>
+                </ul>
+              </details>
+            </div>
+          </article>
+
+          <article class="service">
+            <img src="images/image_6.jpg" alt="PCS Shipping Package">
+            <div class="svc-body">
+              <div class="svc-title">PCS Shipping Package</div>
+              <div class="svc-price">From $250</div>
+              <details>
+                <summary style="cursor:pointer;color:var(--glow-blue);font-weight:600;margin-top:8px;">What's Included</summary>
+                <ul style="margin-top:8px;color:var(--muted);font-size:14px;line-height:1.6;list-style:none;padding-left:0;">
+                  <li>✓ Exterior Wash</li><li>✓ Undercarriage Cleaning</li><li>✓ Door Jamb Cleaning</li>
+                  <li>✓ Deep Interior Vacuum</li><li>✓ Exterior & Interior Windows</li><li>✓ Vinyl/Leather Cleaning</li>
+                  <li>✓ UV Protectant Cream</li><li>✓ Wheel & Tire + Tire Shine</li>
+                  <li><strong>*As per regulations, shampooing is not recommended due to possible mold acceleration*</strong></li>
+                </ul>
+              </details>
+            </div>
+          </article>
         </div>
-      </article>
+      </div>
+    </section>
 
-      <article class="service">
-        <img src="images/image_2.jpg" alt="IShine">
-        <div class="svc-body">
-          <div class="svc-title">IShine</div>
-          <div class="svc-price">From $165</div>
-          <details>
-            <summary style="cursor:pointer;color:var(--glow-blue);font-weight:600;margin-top:8px;">What's Included</summary>
-            <ul style="margin-top:8px;color:var(--muted);font-size:14px;line-height:1.6;list-style:none;padding-left:0;">
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Exterior Wash</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Undercarriage Cleaning</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Door Jamb Cleaning</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Deep Interior Vacuum</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Exterior & Interior Window Cleaning</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Vinyl/Leather UV Protectant Cream</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Wheel & Tire Clean with Tire Shine</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Carnauba Wax</li>
-              <li><em>*Ceramic Spray additional $90.00</em></li>
-            </ul>
-          </details>
-        </div>
-      </article>
-
-      <article class="service">
-        <img src="images/image_3.jpg" alt="Deluxe">
-        <div class="svc-body">
-          <div class="svc-title">Deluxe</div>
-          <div class="svc-price">From $200</div>
-          <details>
-            <summary style="cursor:pointer;color:var(--glow-blue);font-weight:600;margin-top:8px;">What's Included</summary>
-            <ul style="margin-top:8px;color:var(--muted);font-size:14px;line-height:1.6;list-style:none;padding-left:0;">
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Exterior Wash</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Undercarriage Cleaning</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Door Jamb Cleaning</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Deep Interior Vacuum</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Exterior & Interior Window Cleaning</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Vinyl/Leather UV Protectant Cream</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Wheel & Tire Clean with Tire Shine</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Engine Detailing</li>
-              <li><em>*RENEW Ceramic Spray Coating (Hyper Gloss) by System-X</em></li>
-            </ul>
-          </details>
-        </div>
-      </article>
-
-      <article class="service">
-        <img src="images/image_4.jpg" alt="Executive Interior">
-        <div class="svc-body">
-          <div class="svc-title">Executive Interior Detailing</div>
-          <div class="svc-price">From $245</div>
-          <details>
-            <summary style="cursor:pointer;color:var(--glow-blue);font-weight:600;margin-top:8px;">What's Included</summary>
-            <ul style="margin-top:8px;color:var(--muted);font-size:14px;line-height:1.6;list-style:none;padding-left:0;">
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Door Jamb Cleaning</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Deep Interior Vacuum</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Interior Window Cleaning</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Vinyl/Leather UV Protectant Cream</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Interior Shampoo</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Extraction & Steam Clean</li>
-              <li><strong>Free Exterior Wash</strong></li>
-              <li><em>*We do not guarantee stains can be removed</em></li>
-            </ul>
-          </details>
-        </div>
-      </article>
-
-      <article class="service">
-        <img src="images/image_5.jpg" alt="Executive Works">
-        <div class="svc-body">
-          <div class="svc-title">Executive Works Package</div>
-          <div class="svc-price">From $395</div>
-
-          <details>
-            <summary style="cursor:pointer;color:var(--glow-blue);font-weight:600;margin-top:8px;">What's Included</summary>
-            <ul style="margin-top:8px;color:var(--muted);font-size:14px;line-height:1.6;list-style:none;padding-left:0;">
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Exterior Wash & Wax</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Undercarriage Cleaning</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Exterior & Interior Window Cleaning</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Vinyl/Leather Cleaning</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Vinyl/Leather UV Protectant Cream</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Wheel & Tire Clean with Tire Shine</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Interior Shampoo</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Extraction & Steam Clean</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Engine Detailing</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Anti-Bacterial Treatment</li>
-              <li><em>*RENEW Ceramic Spray Coating (Hyper Gloss) by System-X</em></li>
-              <li><em>**We do not guarantee stains can be removed</em></li>
-            </ul>
-          </details>
-        </div>
-      </article>
-
-      <article class="service">
-        <img src="images/image_6.jpg" alt="PCS Shipping Package">
-        <div class="svc-body">
-          <div class="svc-title">PCS Shipping Package</div>
-          <div class="svc-price">From $250</div>
-          <details>
-            <summary style="cursor:pointer;color:var(--glow-blue);font-weight:600;margin-top:8px;">What's Included</summary>
-            <ul style="margin-top:8px;color:var(--muted);font-size:14px;line-height:1.6;list-style:none;padding-left:0;">
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Exterior Wash</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Undercarriage Cleaning</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Door Jamb Cleaning</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Deep Interior Vacuum</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Exterior & Interior Window Cleaning</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Vinyl/Leather Cleaning</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Vinyl/Leather UV Protectant Cream</li>
-              <li><span style="color:var(--glow-blue);text-shadow:0 0 8px rgba(14,165,255,0.6);">✓</span> Wheel & Tire Clean with Tire Shine</li>
-              <li><strong>*As per regulations, shampooing is not recommended due to possible mold acceleration*</strong></li>
-            </ul>
-          </details>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-
-    <section>
+    <!-- Redesigned Ala Carte Services -->
+    <section id="alacarte">
       <div class="section-card">
         <h2>Ala Carte Services</h2>
         <p class="sub">Add these to any package or book individually. Contact us for pricing.</p>
-        <div class="alacarte-grid">
-          <div class="alacarte-item">Engine Bay Detailing</div>
-          <div class="alacarte-item">Headlight Restoration</div>
-          <div class="alacarte-item">Odor Treatment</div>
-          <div class="alacarte-item">Pet Hair Removal</div>
-          <div class="alacarte-item">Paint Correction</div>
-          <div class="alacarte-item">Overspray Removal</div>
+
+        <div class="alacarte-grid pretty">
+          <div class="alacarte-item">
+            <div class="alacarte-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10h11l4 4h3"/><path d="M5 8v8a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2v-1"/><path d="M7 6h2"/><path d="M7 12h3"/></svg>
+            </div>
+            <div class="alacarte-text">
+              <div class="alacarte-title">Engine Bay Detailing</div>
+              <div class="alacarte-desc">Degrease • Dress plastics • Safe rinse</div>
+            </div>
+          </div>
+
+          <div class="alacarte-item">
+            <div class="alacarte-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h7a5 5 0 0 0 5-5v0"/><path d="M4 16h7a5 5 0 0 1 5 5v0"/><path d="M2 9l2 3-2 3"/></svg>
+            </div>
+            <div class="alacarte-text">
+              <div class="alacarte-title">Headlight Restoration</div>
+              <div class="alacarte-desc">Sand • Polish • UV sealant</div>
+            </div>
+          </div>
+
+          <div class="alacarte-item">
+            <div class="alacarte-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 21s0-3 3-3 3 3 3 3"/><path d="M12 3s2 2 0 4 0 4 0 4"/><path d="M16 3s2 2 0 4 0 4 0 4"/></svg>
+            </div>
+            <div class="alacarte-text">
+              <div class="alacarte-title">Odor Treatment</div>
+              <div class="alacarte-desc">Enzyme + ozone options</div>
+            </div>
+          </div>
+
+          <div class="alacarte-item">
+            <div class="alacarte-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 19c4-3 8-3 12 0"/><path d="M8 13c.5-2 1.5-4 4-4s3.5 2 4 4"/><circle cx="7" cy="6" r="2"/><circle cx="12" cy="5" r="2"/><circle cx="17" cy="6" r="2"/></svg>
+            </div>
+            <div class="alacarte-text">
+              <div class="alacarte-title">Pet Hair Removal</div>
+              <div class="alacarte-desc">Deep extraction & lint control</div>
+            </div>
+          </div>
+
+          <div class="alacarte-item">
+            <div class="alacarte-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 16l6-6 4 4 7-7"/><path d="M14 7l3-3 3 3-3 3z"/></svg>
+            </div>
+            <div class="alacarte-text">
+              <div class="alacarte-title">Paint Correction</div>
+              <div class="alacarte-desc">Scratch/swirl reduction • Gloss boost</div>
+            </div>
+          </div>
+
+          <div class="alacarte-item">
+            <div class="alacarte-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="8" height="12" rx="2"/><path d="M7 16v4"/><path d="M14 8h7"/><path d="M14 12h5"/><path d="M14 16h3"/></svg>
+            </div>
+            <div class="alacarte-text">
+              <div class="alacarte-title">Overspray Removal</div>
+              <div class="alacarte-desc">Clay + safe solvents • Smooth finish</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="alacarte-note">
+          Not sure what you need? <a href="#booking">Tell us your goals</a> and we’ll recommend add-ons.
         </div>
       </div>
     </section>
@@ -727,6 +765,7 @@
   </div>
 
   <script>
+    // smooth anchor scroll
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
       a.addEventListener('click', function(e){
         const href = this.getAttribute('href');
