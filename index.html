@@ -311,7 +311,44 @@ em {
 
   /* Booking & Contact */
   .booking-wrap{display:grid;grid-template-columns:1.5fr 1fr;gap:22px;align-items:start;margin-top:20px}
-  .form input,.form textarea,.form select{width:100%;padding:11px 14px;border-radius:10px;border:1px solid #2a3a62;background:#0a1530;color:#ecf1f8;font-weight:600;margin-bottom:12px;font-size:14px;transition:border-color .15s, box-shadow .15s}
+  .form input,.form textarea,.form select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 16px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  appearance: none;
+  cursor: pointer;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23f5d76e" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
+}
+
+/* Hover and focus glow */
+.form select:hover,
+.form select:focus {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 8px rgba(245, 215, 110, 0.4);
+}
+
+/* Force dropdown (options) styling */
+.form select option {
+  background-color: #0a1228;  /* deep navy background */
+  color: #fff;                /* white text */
+}
+
+.form select option:hover,
+.form select option:focus {
+  background-color: #f5d76e;
+  color: #0a1228;
+}
+
   .form input:focus,.form textarea:focus,.form select:focus{outline:none;border-color:#3d5391;box-shadow:0 0 0 2px rgba(124,169,255,.12) inset}
   .form label{display:block;margin-bottom:5px;color:#a8b3c7;font-size:13px;font-weight:600}
   .submit-big{padding:14px;border-radius:10px;border:0;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#0a1328;cursor:pointer;width:100%;box-shadow:0 10px 22px rgba(0,0,0,0.26)}
@@ -582,6 +619,7 @@ em{
 footer{ color:#aeb9cf; }
 footer .wrap > div:first-child{ color:#e8eef7; font-weight:800; }
 
+
 /* === NASCAR Font Setup (Bebas Neue + Exo 2) === */
 body {
   font-family: "Exo 2", sans-serif;
@@ -774,6 +812,34 @@ p.sub{ font-size:16px; color:#b8c4d9; margin-bottom:22px; }
 .form input,.form select,.form textarea{
   font-size:16px; padding:13px 14px;
 }
+.form select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 16px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  appearance: none;
+  cursor: pointer;
+}
+
+.form select:hover,
+.form select:focus {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 8px rgba(245, 215, 110, 0.4);
+}
+
+.form select {
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23f5d76e" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
+}
+
 .submit-big{ font-size:16px; padding:16px; }
 
 footer{ color:#b9c5da; }
@@ -915,7 +981,6 @@ html::before {
   padding: 6px 0;
   border-radius: 0 0 12px 12px;
 }
-
 
 </style>
 </head>
@@ -1397,6 +1462,15 @@ html::before {
               <label for="addons">Additional Requests</label>
               <textarea id="addons" name="Notes" rows="4" placeholder="Any special needs or add-on services?"></textarea>
             </div>
+            
+            <!-- Contact Preference -->
+            <label for="contact_method">How would you like to be contacted?</label>
+            <select id="contact_method" name="Contact Method" required>
+              <option value="" disabled selected>Select an option</option>
+              <option value="Phone Call">Phone Call</option>
+              <option value="Email">Email</option>
+              <option value="Text Message">Text Message</option>
+            </select>
 
             <button type="submit" class="submit-big">Submit Request</button>
             <div id="form-status" class="form-status" aria-live="polite" style="margin-top:10px"></div>
@@ -1416,9 +1490,6 @@ html::before {
                 <div>
                   <div style="font-weight:800;margin-bottom:6px;color:#fff">Prefer WhatsApp?</div>
                   <div style="font-size:18px;font-weight:800;color:#cfe1ff">
-                    <a href="https://wa.me/16716464569?text=Hi!%20I%E2%80%99d%20like%20to%20book%20a%20service.%20Vehicle:%20____.%20When%20is%20your%20next%20opening%3F" target="_blank" rel="noopener" style="color:inherit">(671) 646-4569</a>
-                  </div>
-                  <div style="color:#a8b3c7;font-size:13px;margin-top:4px">
                     <a href="https://wa.me/16717975593?text=Hi!%20I%E2%80%99d%20like%20to%20book%20a%20service.%20Vehicle:%20____.%20When%20is%20your%20next%20opening%3F" target="_blank" rel="noopener" style="color:inherit">(671) 797-5593</a>
                   </div>
                 </div>
@@ -1448,10 +1519,10 @@ html::before {
               <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 1.94 8.26 2 2 0 0 1 4 6h3a2 2 0 0 1 2 1.72c.07.6.2 1.19.39 1.76a2 2 0 0 1-.45 2.11L8.09 12.1a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.57.19 1.16.32 1.76.39A2 2 0 0 1 22 16.92z"/></svg>
               <div>
                 <div class="contact-title" style="font-weight:800;margin-bottom:5px;font-size:15px;color:#fff">Phone</div>
-                <div class="contact-detail" style="color:#cbd6e8;font-size:13px;line-height:1.6">Message us for the fastest response.</div>
-                <a href="https://wa.me/16716464569?text=Hi!%20Quick%20quote%20please.%20Vehicle:%20____." target="_blank" rel="noopener" class="contact-link" style="color:#e8eef7;font-weight:700;margin-top:6px;display:inline-block">(671) 646-4569</a>
+                <div class="contact-detail" style="color:#cbd6e8;font-size:13px;line-height:1.6"></div>
+                <a href="https://wa.me/16716464569?text=Hi!%20Quick%20quote%20please.%20Vehicle:%20____." target="_blank" rel="noopener" class="contact-link" style="color:#e8eef7;font-weight:700;margin-top:6px;display:inline-block">(671) 646-4569<span style="color:#f5d76e;font-weight:600;"> — Cell</span></a>
                 <div style="margin-top:4px">
-                  <a href="https://wa.me/16717975593?text=Hi!%20Quick%20quote%20please.%20Vehicle:%20____." target="_blank" rel="noopener" style="color:#a8b3c7;font-size:14px">(671) 797-5593</a>
+                  <a href="https://wa.me/16717975593?text=Hi!%20Quick%20quote%20please.%20Vehicle:%20____." target="_blank" rel="noopener" style="color:#e8eef7;font-weight:700;margin-top:6px;display:inline-block">(671) 797-5593<span style="color:#f5d76e;font-weight:600;"> — WhatsApp</span></a>
                 </div>
               </div>
             </div>
