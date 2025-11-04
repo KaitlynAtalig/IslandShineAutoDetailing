@@ -1925,6 +1925,41 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 }
 
+@media (max-width: 768px) {
+  .topbar,
+  .nav-header,
+  .nav-logo {
+    display: flex;
+    justify-content: center !important;
+    align-items: center;
+    text-align: center;
+  }
+
+  .topbar img,
+  .nav-logo img,
+  .logo img {
+    display: block;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* Remove left/right padding or gaps that push it off-center */
+  .topbar,
+  .nav-header {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* Prevent menu or contact elements from offsetting it */
+  .nav-links,
+  .nav-contact,
+  .menu-toggle {
+    position: static !important;
+    transform: none !important;
+  }
+}
+
+
 </style>
 
 <div class="mobile-cta-bar" aria-label="Quick contact">
