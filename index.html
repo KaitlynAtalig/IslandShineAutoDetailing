@@ -1678,172 +1678,60 @@ html::before {
     
   </script>
 
-  <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const track = document.querySelector('.gallery-track');
-  if (!track) return;
-
-  // Clone all images once for continuous scroll
-  const slides = Array.from(track.children);
-  slides.forEach(slide => track.appendChild(slide.cloneNode(true)));
-
-  // Calculate actual width of one set
-  const oneSetWidth = track.scrollWidth / 2;
-
-  // Create exact keyframes for smooth looping
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes galleryLoop {
-      from { transform: translateX(0); }
-      to { transform: translateX(-${oneSetWidth}px); }
-    }
-  `;
-  document.head.appendChild(style);
-
-  // Pause on hover
-  track.addEventListener('mouseenter', () => track.style.animationPlayState = 'paused');
-  track.addEventListener('mouseleave', () => track.style.animationPlayState = 'running');
-});
-</script>
-
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const track = document.querySelector('.gallery-track');
-  const serviceImgs = Array.from(document.querySelectorAll('.service img'));
-  if (!track) return;
+  if (!track || track.dataset.initialized) return;
+  track.dataset.initialized = 'true';
 
-  // 1) Add existing service images to the gallery (so they also appear there)
-  serviceImgs.forEach(img => {
-    const el = document.createElement('img');
-    el.src = img.getAttribute('src');
-    el.alt = img.getAttribute('alt') || 'Detailing result';
-    track.appendChild(el);
-  });
+  // Clone all gallery-item elements for seamless loop
+  const items = Array.from(track.querySelectorAll('.gallery-item'));
+  items.forEach(item => track.appendChild(item.cloneNode(true)));
 
-  // 2) Replace first two service images with the truck photos
-  const trucks = ['images/car10.jpg','images/car11.jpg'];
-  serviceImgs.slice(0, 2).forEach((img, i) => {
-    img.src = trucks[i];
-    img.alt = i === 0
-      ? 'Truck detail — after finish'
-      : 'Truck exterior — premium wash & protect';
-  });
-
-  // 3) Also append the rest of your new truck photos directly to the gallery
-  ['images/car12.jpg','images/car13.jpg','images/car14.jpg'].forEach(src => {
-    const el = document.createElement('img');
-    el.src = src;
-    el.alt = 'Detailing result';
-    track.appendChild(el);
-  });
-
-  // 4) Build a perfect seamless loop: duplicate once & animate exact width
-  const originals = Array.from(track.children);
-  originals.forEach(slide => track.appendChild(slide.cloneNode(true)));
-
-  const oneSetWidth = track.scrollWidth / 2; // exact pixels incl. gaps/borders
-
-  // inject exact keyframes
-  const styleId = 'galleryLoopKF';
+  // Calculate the width of one complete set
+  const oneSetWidth = track.scrollWidth / 2;
+  
+  // Inject the animation
+  const styleId = 'galleryAnimation';
   let styleEl = document.getElementById(styleId);
   if (styleEl) styleEl.remove();
+  
   styleEl = document.createElement('style');
   styleEl.id = styleId;
   styleEl.textContent = `
-    @keyframes galleryLoop {
+    .gallery-track {
+      animation: galleryScroll 120s linear infinite !important;
+    }
+    @keyframes galleryScroll {
       from { transform: translateX(0); }
-      to   { transform: translateX(-${oneSetWidth}px); }
+      to { transform: translateX(-${oneSetWidth}px); }
+    }
+    .gallery-track:hover {
+      animation-play-state: paused !important;
     }
   `;
   document.head.appendChild(styleEl);
 
-
-
-  // Pause on hover
-  const wrapper = document.querySelector('.gallery-wrapper') || track.parentElement;
-  wrapper.addEventListener('mouseenter', () => track.style.animationPlayState = 'paused');
-  wrapper.addEventListener('mouseleave', () => track.style.animationPlayState = 'running');
-
-  // Recompute on resize (so the loop stays seamless)
-  let timer;
+  // Recalculate on resize
+  let resizeTimer;
   window.addEventListener('resize', () => {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-      track.style.animation = 'none';
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
       const newWidth = track.scrollWidth / 2;
       styleEl.textContent = `
-        @keyframes galleryLoop {
+        .gallery-track {
+          animation: galleryScroll 120s linear infinite !important;
+        }
+        @keyframes galleryScroll {
           from { transform: translateX(0); }
-          to   { transform: translateX(-${newWidth}px); }
+          to { transform: translateX(-${newWidth}px); }
+        }
+        .gallery-track:hover {
+          animation-play-state: paused !important;
         }
       `;
-      void track.offsetWidth; // reflow
-    }, 150);
+    }, 250);
   });
-});
-</script>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const SUBJECT = 'Island Shine Auto Detailing Inquiry';
-  const BODY = ''; // optional: put a default message here
-
-  document.querySelectorAll('a[href^="mailto:islandshinemsc@outlook.com"]').forEach(a => {
-    const href = a.getAttribute('href') || '';
-    const [base, qs] = href.split('?');
-    const params = new URLSearchParams(qs || '');
-    if (!params.has('subject')) params.set('subject', SUBJECT);
-    if (BODY && !params.has('body')) params.set('body', BODY);
-    a.setAttribute('href', `${base}?${params.toString()}`);
-  });
-});
-</script>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  // Customize these:
-  const SUBJECT = 'Island Shine Auto Detailing Inquiry';
-  const BODY = [
-    'Hi Island Shine Team,',
-    '',
-    'I’d like to book a detailing service.',
-    '',
-    'Vehicle: _____',
-    'Preferred Date: _____',
-    'Preferred Time: _____',
-    '',
-    'Thank you!'
-  ].join('\r\n'); // multiple lines
-
-  // Convert EVERY mailto: link to a Gmail compose link that opens in a new tab
-  document.querySelectorAll('a[href^="mailto:"]').forEach(a => {
-    const href = a.getAttribute('href') || '';
-    const email = href.replace(/^mailto:/i, '').split('?')[0].trim();
-    if (!email) return;
-
-    const gmailURL =
-      'https://mail.google.com/mail/?view=cm&fs=1'
-      + '&to='  + encodeURIComponent(email)
-      + '&su='  + encodeURIComponent(SUBJECT)
-      + '&body='+ encodeURIComponent(BODY);
-
-    a.setAttribute('href', gmailURL);
-    a.setAttribute('target', '_blank');
-    a.setAttribute('rel', 'noopener');
-  });
-});
-</script>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const track = document.querySelector('.gallery-track');
-  if (!track) return;
-  const DURATION = '120s'; // change to 90s/150s/180s if you want
-  const current = track.style.animation || '';
-  const replaced = current.replace(/galleryLoop\s+\d+(\.\d+)?s/i, `galleryLoop ${DURATION}`);
-  track.style.animation = replaced && replaced.includes('galleryLoop')
-    ? replaced
-    : `galleryLoop ${DURATION} linear infinite`;
 });
 </script>
 
@@ -1869,7 +1757,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (res.ok) {
         form.reset();
         statusEl.className = 'form-status success';
-        statusEl.textContent = '✅ Request sent! We’ll message you to confirm your appointment.';
+        statusEl.textContent = '✅ Request sent! We will message you to confirm your appointment.';
       } else {
         const data = await res.json().catch(() => ({}));
         const msg = (data && data.errors)
@@ -1885,19 +1773,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-</script>
-
-<script>
-  (function(){
-    const track = document.querySelector('#gallery .gallery-track');
-    if (!track) return;
-    if (track.dataset.cloned) return; // don’t double-clone
-    track.dataset.cloned = "1";
-
-    // Duplicate children for seamless loop
-    const kids = Array.from(track.children);
-    kids.forEach(node => track.appendChild(node.cloneNode(true)));
-  })();
 </script>
 
 <style>
