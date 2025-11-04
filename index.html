@@ -44,7 +44,14 @@
   }
   .brand{display:flex;align-items:center;gap:14px}
   .logo-wrap{padding:0;border:none;background:transparent;box-shadow:none;border-radius:0}
-  .brand img{height:72px;width:auto;display:block;object-fit:contain}
+  .brand img {
+  height: 72px; /* keep your original height */
+  width: auto;
+  display: block;
+  object-fit: contain;
+  transform: scale(1.6);
+  transform-origin: left center; /* ensures it expands to the right, not downward */
+}
   @media (max-width:768px){ .brand img{ height:60px; } }
 
   .nav-links{display:flex;gap:8px;flex-wrap:wrap}
@@ -100,16 +107,106 @@
   .svc-title{font-weight:800;font-size:16px}
   .svc-price{color:#9bc4ff;font-weight:800;font-size:15px}
 
-  /* Smooth, multi-open dropdowns */
-  details.dropdown{border:1px solid #243153;background:rgba(255,255,255,.03);border-radius:10px;margin-top:8px;overflow:visible;transition:border-color .2s,background .2s}
-  details.dropdown[open]{background:rgba(124,169,255,.08);border-color:#2a3a62}
-  details.dropdown summary{cursor:pointer;list-style:none;padding:10px 36px 10px 12px;font-weight:800;font-size:14px;position:relative;color:#e5ecf8}
-  details.dropdown summary::-webkit-details-marker{display:none}
-  details.dropdown summary::after{content:"";position:absolute;right:12px;top:50%;width:10px;height:10px;border-right:2px solid #9bc4ff;border-bottom:2px solid #9bc4ff;transform:translateY(-60%) rotate(-45deg);transition:transform .2s}
-  details.dropdown[open] summary::after{transform:translateY(-40%) rotate(45deg)}
-  .dropdown-content{overflow:hidden;height:0;padding:0 12px;transition:height .35s ease, padding-bottom .35s ease;will-change:height}
-  details.dropdown[open] .dropdown-content{padding-bottom:12px}
-  .dropdown-list{margin:8px 0 0;padding-left:0;list-style:none;color:#cbd6e8;font-size:14px;line-height:1.6}
+ /* Smooth, multi-open dropdowns */
+details.dropdown {
+  border: 1px solid #243153;
+  background: rgba(255,255,255,.03);
+  border-radius: 10px;
+  margin-top: 8px;
+  overflow: hidden;
+  transition: border-color .2s, background .2s;
+}
+details.dropdown[open] {
+  background: rgba(124,169,255,.08);
+  border-color: #2a3a62;
+}
+details.dropdown summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 12px 40px 12px 16px;
+  font-weight: 800;
+  font-size: 14px;
+  position: relative;
+  color: #e5ecf8;
+  transition: background .2s;
+}
+details.dropdown summary::-webkit-details-marker { display: none; }
+details.dropdown summary::after {
+  content: "";
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid #9bc4ff;
+  border-bottom: 2px solid #9bc4ff;
+  transform: translateY(-60%) rotate(-45deg);
+  transition: transform .2s;
+}
+details.dropdown[open] summary::after {
+  transform: translateY(-40%) rotate(45deg);
+}
+.dropdown-content {
+  overflow: hidden;
+  height: 0;
+  padding: 0 16px;
+  transition: height .35s ease, padding .35s ease;
+  will-change: height;
+}
+details.dropdown[open] .dropdown-content {
+  padding-bottom: 12px;
+}
+
+/* Dropdown list with glowing aligned checkmarks */
+.dropdown-list {
+  margin: 8px 0 0;
+  padding-left: 0;
+  list-style: none;
+  color: #cbd6e8;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.dropdown-list li {
+  position: relative;
+  list-style: none;
+  padding-left: 24px; /* creates space for checkmark */
+  color: #cbd6e8;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.dropdown-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #5fa8ff;
+  font-weight: 900;          /* keeps them bold */
+  font-size: 16px;           /* visible but not oversized */
+  text-shadow:
+    0 0 2px #79d2ff,
+    0 0 4px #5fa8ff;         /* softer glow */
+  animation: glowPulse 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes glowPulse {
+  0% {
+    text-shadow:
+      0 0 2px #5fa8ff,
+      0 0 4px #79d2ff;
+  }
+  100% {
+    text-shadow:
+      0 0 4px #79d2ff,
+      0 0 6px #5fa8ff;
+  }
+}
+
+/* Make italicized <em> text bold instead */
+em {
+  font-style: normal;
+  font-weight: 800;
+  color: #f5d76e; 
+}
 
   /* Why Choose Us */
   .feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:18px}
@@ -120,7 +217,6 @@
   .feature-desc{color:var(--muted);font-size:13px;line-height:1.6}
 
   /* Gallery */
-  .gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:16px}
   .gallery-grid img{width:100%;height:200px;object-fit:cover;border-radius:12px;border:1px solid #243153;box-shadow:0 8px 18px rgba(0,0,0,.24)}
   #gallery.show{display:block}
 
@@ -158,6 +254,10 @@
   .form label{display:block;margin-bottom:5px;color:#a8b3c7;font-size:13px;font-weight:600}
   .submit-big{padding:14px;border-radius:10px;border:0;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#0a1328;cursor:pointer;width:100%;box-shadow:0 10px 22px rgba(0,0,0,0.26)}
   .submit-big:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(0,0,0,0.32)}
+  .form-status{font-size:14px;font-weight:700;padding:10px 12px;border-radius:10px}
+  .form-status.success{background:rgba(59,209,125,.14);border:1px solid #2b6048;color:#cfeedd}
+  .form-status.error{background:rgba(255,80,80,.14);border:1px solid #6b2e2e;color:#ffd6d6}
+
   .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:20px}
   .contact-card{display:flex;gap:14px;align-items:flex-start;padding:16px;border-radius:12px;background:var(--surface);border:1px solid #243153;box-shadow:0 8px 18px rgba(0,0,0,0.24)}
   .contact-card svg{width:34px;height:34px;flex-shrink:0;stroke:#bcd6ff;stroke-width:2;fill:none}
@@ -180,6 +280,334 @@
   }
   @media (max-width:768px){ .sticky-call{display:block} .hero{min-height:58vh} }
   @media (max-width:640px){ .contact-info{display:none} .section-card{padding:20px} }
+
+  /* === Aesthetic polish overrides (non-destructive) === */
+
+/* Keep logo big without shifting layout; scale down a touch on small screens */
+.brand img { transform: scale(1.6); transform-origin: left center; }
+@media (max-width: 820px) { .brand img { transform: scale(1.35); } }
+@media (max-width: 560px) { .brand img { transform: scale(1.2); } }
+
+/* Topbar: subtle depth + crisper nav */
+.topbar {
+  box-shadow: 0 6px 22px rgba(10,18,40,.12);
+}
+.nav-link {
+  letter-spacing: .4px;
+  border-radius: 10px;
+  transition: background .2s, transform .12s;
+}
+.nav-link:hover {
+  background: rgba(15,24,54,.08);
+  transform: translateY(-1px);
+}
+
+/* Hero: stronger readability + nicer button feel */
+.hero {
+  background-image:
+    linear-gradient(0deg, rgba(10,18,40,.82), rgba(10,18,40,.50)),
+    var(--hero-img);
+}
+.hero h1 {
+  letter-spacing: .2px;
+  text-shadow: 0 2px 0 rgba(10,18,40,.38), 0 8px 28px rgba(0,0,0,.35);
+}
+.lead {
+  max-width: 820px;
+  color: #e1e8f5;
+  opacity: .95;
+}
+.btn {
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.20);
+}
+.btn-primary { box-shadow: 0 14px 28px rgba(0,0,0,.24); }
+.btn-primary:hover { box-shadow: 0 18px 34px rgba(0,0,0,.30); }
+.btn-ghost { backdrop-filter: saturate(120%) blur(1px); }
+
+/* Cards: smoother glassy depth */
+.section-card {
+  background: linear-gradient(180deg, rgba(20,31,63,.94), rgba(17,28,57,.97));
+  border: 1px solid #2a3a62;
+  box-shadow: 0 18px 42px rgba(0,0,0,.28);
+  border-radius: 16px;
+}
+
+/* Gallery: tidy rounding + hover lift */
+.gallery-grid img,
+.ba-card { border-radius: 14px; }
+.gallery-grid img {
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.gallery-grid img:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(0,0,0,.28);
+}
+
+/* Dropdown summary caret & spacing */
+details.dropdown summary {
+  padding: 12px 42px 12px 16px;
+  color: #f2f6ff;
+}
+details.dropdown summary::after {
+  border-color: #cfe1ff;
+}
+
+/* Checklist: softened, aligned glow (already yellow for <em>) */
+.dropdown-list li {
+  padding-left: 24px;
+}
+.dropdown-list li::before {
+  content: "✓";
+  position: absolute; left: 0; top: 0;
+  font-weight: 900; font-size: 16px;
+  color: #5fa8ff; /* keep blue checks; easy to swap if you want yellow */
+  text-shadow: 0 0 2px #79d2ff, 0 0 4px #5fa8ff;
+  animation: glowPulse 1.8s ease-in-out infinite alternate;
+}
+
+/* Emphasis notes: logo-yellow and readable */
+em {
+  font-style: normal; font-weight: 800; color: #f5d76e;
+  text-shadow: 0 0 2px rgba(245,215,110,.45);
+}
+
+/* Ala carte + contact chips: a touch more contrast */
+.alacarte-item,
+.contact-card {
+  background: linear-gradient(180deg, rgba(20,31,63,.96), rgba(15,26,51,.96));
+  border-color: #2a3a62;
+}
+
+/* === ISLAND SHINE — PROFESSIONAL POLISH PACK (drop-in overrides) === */
+
+/* 0) Brand logo — keep large but stable */
+.brand img { transform: scale(1.6); transform-origin: left center; }
+@media (max-width: 820px){ .brand img{ transform: scale(1.35); } }
+@media (max-width: 560px){ .brand img{ transform: scale(1.18); } }
+
+/* 1) Global type & rhythm */
+body { letter-spacing: .1px; }
+h1,h2 { letter-spacing: .2px; }
+h1 { text-wrap: balance; }
+p, .lead { text-wrap: pretty; }
+section { padding: 44px 0; }           /* slightly airier */
+@media (max-width: 640px){ section{ padding: 36px 0; } }
+
+/* 2) Topbar — cleaner depth, crisper nav */
+.topbar {
+  box-shadow: 0 6px 22px rgba(10,18,40,.10);
+  backdrop-filter: saturate(120%);
+}
+.nav-link {
+  border-radius: 10px;
+  padding: 10px 14px;
+  transition: background .18s ease, transform .12s ease;
+}
+.nav-link:hover { background: rgba(15,24,54,.08); transform: translateY(-1px); }
+
+/* 3) Hero — readability + premium feel */
+.hero{
+  background-image:
+    linear-gradient(0deg, rgba(10,18,40,.84), rgba(10,18,40,.52)),
+    var(--hero-img);
+}
+.hero h1{
+  text-shadow: 0 2px 0 rgba(10,18,40,.35), 0 12px 36px rgba(0,0,0,.35);
+}
+.lead{
+  color:#e5ecf8; opacity:.95; max-width: 840px;
+}
+
+/* 4) Buttons — consistent elevation & hover */
+.btn{ border-radius: 12px; box-shadow: 0 10px 22px rgba(0,0,0,.18); }
+.btn-primary{ box-shadow: 0 14px 28px rgba(0,0,0,.22); }
+.btn-primary:hover{ box-shadow: 0 18px 36px rgba(0,0,0,.28); transform: translateY(-1px); }
+.btn-ghost{ border:1px solid rgba(255,255,255,.20); background: rgba(14,24,54,.55); }
+.btn-ghost:hover{ background: rgba(14,24,54,.72); }
+
+/* 5) Cards & sections — subtle glass, tighter borders */
+.section-card{
+  background: linear-gradient(180deg, rgba(20,31,63,.95), rgba(17,28,57,.97));
+  border:1px solid #2a3a62;
+  border-radius:16px;
+  box-shadow: 0 18px 42px rgba(0,0,0,.26);
+}
+.service{ border-radius:14px; }
+.service:hover{ border-color:#314578; }
+
+/* 6) Media — consistent rounding + hover lift */
+.gallery-grid img, .ba-card { border-radius: 14px; }
+.gallery-grid img{
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.gallery-grid img:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(0,0,0,.26);
+}
+
+/* 7) Dropdowns — padding, caret, smooth height */
+details.dropdown summary{
+  padding: 12px 42px 12px 16px;
+  color:#f2f6ff;
+}
+details.dropdown summary::after{
+  right:16px; border-color:#cfe1ff;
+}
+.dropdown-content{
+  transition: height .35s ease, padding .35s ease;
+}
+.dropdown-list{
+  margin: 8px 0 0;
+  padding-left:0; list-style:none;
+  color:#cbd6e8; font-size:14px; line-height:1.65;
+}
+.dropdown-list li{
+  position:relative; padding-left:24px;
+}
+
+/* 8) Checkmarks — crisp, aligned, softer glow (blue by default) */
+.dropdown-list li::before{
+  content:"✓";
+  position:absolute; left:0; top:0;
+  font-weight:900; font-size:16px; color:#5fa8ff;
+  text-shadow: 0 0 2px #79d2ff, 0 0 4px #5fa8ff; /* toned down */
+  animation: glowPulse 1.8s ease-in-out infinite alternate;
+}
+@keyframes glowPulse{
+  0% { text-shadow: 0 0 2px #5fa8ff, 0 0 4px #79d2ff; }
+  100%{ text-shadow: 0 0 4px #79d2ff, 0 0 6px #5fa8ff; }
+}
+
+/* 9) Emphasis notes — logo yellow, subtle glow */
+em{
+  font-style: normal; font-weight: 800; color: #f5d76e;
+  text-shadow: 0 0 2px rgba(245,215,110,.45);
+}
+
+/* 10) Inputs & forms — accessible focus + nicer fields */
+.form input,.form textarea,.form select{
+  border-radius: 12px;
+  background:#0a1530; border:1px solid #2e3e6b;
+  transition: border-color .15s, box-shadow .15s;
+}
+.form input:focus,.form textarea:focus,.form select:focus{
+  border-color:#5fa8ff; box-shadow: 0 0 0 3px rgba(95,168,255,.18);
+}
+
+/* 11) Utility blocks — elevate ala carte & contact cards */
+.alacarte-item, .contact-card{
+  background: linear-gradient(180deg, rgba(20,31,63,.96), rgba(15,26,51,.96));
+  border-color:#2a3a62; border-radius:14px;
+}
+
+/* 12) Footer — clearer hierarchy */
+footer{ color:#aeb9cf; }
+footer .wrap > div:first-child{ color:#e8eef7; font-weight:800; }
+
+/* === FINAL POLISH (Professional Finish) === */
+
+/* Typography and rhythm */
+body {
+  font-family: "Inter", "Poppins", system-ui, sans-serif;
+  letter-spacing: 0.1px;
+  line-height: 1.7;
+}
+h1, h2, h3 { letter-spacing: 0.25px; }
+p, .lead { text-wrap: pretty; }
+
+/* Logo: large, clean, and balanced */
+.brand img {
+  transform: scale(1.6);
+  transform-origin: left center;
+  filter: drop-shadow(0 3px 8px rgba(0,0,0,0.35));
+}
+
+/* Buttons: premium feel with subtle hover */
+.btn {
+  border-radius: 12px;
+  font-weight: 700;
+  transition: all 0.25s ease;
+}
+.btn-primary {
+  background: linear-gradient(135deg, #f5d76e, #f8c547);
+  color: #0a1328;
+  box-shadow: 0 10px 20px rgba(245, 215, 110, 0.35);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(245, 215, 110, 0.45);
+}
+
+/* Checkmarks: logo-yellow with a soft glow */
+.dropdown-list li::before {
+  color: #f5d76e;
+  text-shadow: 0 0 3px rgba(245, 215, 110, 0.5), 0 0 6px rgba(245, 215, 110, 0.25);
+}
+
+/* Card hover polish */
+.service:hover,
+.feature-card:hover,
+.alacarte-item:hover,
+.contact-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 36px rgba(0,0,0,0.35);
+  transition: all 0.25s ease;
+}
+
+/* Footer tone */
+footer {
+  background: linear-gradient(180deg, rgba(10,18,40,0.9), rgba(10,18,40,1));
+  border-top: 1px solid rgba(255,255,255,0.05);
+  color: #cfd6e3;
+}
+
+/* --- Continuous Looping Gallery --- */
+.gallery-wrapper {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.gallery-track {
+  display: flex;
+  gap: 16px;
+  animation: none;
+}
+
+.gallery-track:hover {
+  animation-play-state: paused;
+}
+
+.gallery-track img {
+  flex: 0 0 auto;
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid #243153;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+  transition: transform 0.3s ease;
+}
+
+.gallery-track img:hover {
+  transform: scale(1.05);
+}
+
+@keyframes scrollGallery {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+@media (max-width: 900px) {
+  .gallery-track img { width: 260px; height: 180px; }
+}
+
+@media (max-width: 640px) {
+  .gallery-track img { width: 220px; height: 160px; }
+}
+
+
 </style>
 </head>
 <body>
@@ -207,7 +635,8 @@
       </span>
       <span class="ci">
         <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m3 8 9 6 9-6"/></svg>
-        <a href="mailto:islandshinemsc@outlook.com">islandshinemsc@outlook.com</a>
+        <a href="mailto:islandshinemsc@outlook.com?subject=Island%20Shine%20Auto%20Detailing%20Inquiry">islandshinemsc@outlook.com</a>
+
       </span>
       <span class="ci">
         <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -236,24 +665,18 @@
       <div class="section-card">
         <h2>Gallery</h2>
         <p class="sub">See the Island Shine difference — real results from our detailing experts.</p>
-        <div class="gallery-grid">
-          <img src="images/gallery1.jpg" alt="Detailed BMW" loading="lazy">
-          <img src="images/gallery2.jpg" alt="Interior Deep Clean" loading="lazy">
-          <img src="images/gallery3.jpg" alt="Ceramic Coating Finish" loading="lazy">
-          <img src="images/gallery4.jpg" alt="Wax and Polish" loading="lazy">
-          <img src="images/gallery5.jpg" alt="Headlight Restoration" loading="lazy">
-          <img src="images/gallery6.jpg" alt="Full Exterior Detail" loading="lazy">
-        </div>
-
-        <div class="before-after">
-          <div class="ba-card">
-            <img src="images/before_headlight.jpg" alt="Headlight before restoration" loading="lazy">
-            <span class="ba-tag">Before</span>
-          </div>
-          <div class="ba-card">
-            <img src="images/after_headlight.jpg" alt="Headlight after restoration" loading="lazy">
-            <span class="ba-tag">After</span>
-          </div>
+       <div class="gallery-wrapper">
+        <div class="gallery-track">
+          <img src="images/car6.jpg" alt="White Porsche after detailing">
+          <img src="images/car7.jpg" alt="White SUV exterior clean finish">
+          <img src="images/car8.jpg" alt="Black Bronco shine finish">
+          <img src="images/car9.jpg" alt="Land Rover Defender detailing result">
+          <img src="images/b4.jpg" alt="Headlight restoration before">
+          <img src="images/after.jpg" alt="Headlight restoration after">
+          <img src="images/b4Vacuum.jpg" alt="Interior before vacuuming">
+          <img src="images/vacuum.jpg" alt="Interior after vacuuming">
+          <img src="images/engineb4.jpg" alt="Engine bay before cleaning">
+          <img src="images/engineafter.jpg" alt="Engine bay after cleaning">
         </div>
       </div>
     </section>
@@ -309,7 +732,7 @@
                 <summary>What's Included</summary>
                 <div class="dropdown-content">
                   <ul class="dropdown-list">
-                    <li>✓ Exterior Wash</li><li>✓ Interior Vacuum</li><li>✓ Light Interior Wipe Down</li><li>✓ Exterior & Interior Window Cleaning</li>
+                    <li> Exterior Wash</li><li> Interior Vacuum</li><li> Light Interior Wipe Down</li><li> Exterior & Interior Window Cleaning</li>
                   </ul>
                 </div>
               </details>
@@ -325,7 +748,7 @@
                 <summary>What's Included</summary>
                 <div class="dropdown-content">
                   <ul class="dropdown-list">
-                    <li>✓ Exterior Wash</li><li>✓ Undercarriage Cleaning</li><li>✓ Door Jamb Cleaning</li><li>✓ Deep Interior Vacuum</li><li>✓ Exterior & Interior Windows</li><li>✓ Vinyl/Leather UV Protectant</li><li>✓ Wheels & Tires + Tire Shine</li><li>✓ Carnauba Wax</li><li><em>*Ceramic Spray additional $90.00</em></li>
+                    <li> Exterior Wash</li><li> Undercarriage Cleaning</li><li> Door Jamb Cleaning</li><li> Deep Interior Vacuum</li><li> Exterior & Interior Windows</li><li> Vinyl/Leather UV Protectant</li><li> Wheels & Tires + Tire Shine</li><li> Carnauba Wax</li><li><em> *Ceramic Spray additional $90.00</em></li>
                   </ul>
                 </div>
               </details>
@@ -341,7 +764,7 @@
                 <summary>What's Included</summary>
                 <div class="dropdown-content">
                   <ul class="dropdown-list">
-                    <li>✓ Exterior Wash</li><li>✓ Undercarriage Cleaning</li><li>✓ Door Jamb Cleaning</li><li>✓ Deep Interior Vacuum</li><li>✓ Exterior & Interior Windows</li><li>✓ Vinyl/Leather UV Protectant</li><li>✓ Wheels & Tires + Tire Shine</li><li>✓ Engine Detailing</li><li><em>*RENEW Ceramic Spray Coating (Hyper Gloss) by System-X</em></li>
+                    <li> Exterior Wash</li><li> Undercarriage Cleaning</li><li> Door Jamb Cleaning</li><li> Deep Interior Vacuum</li><li> Exterior & Interior Windows</li><li> Vinyl/Leather UV Protectant</li><li> Wheels & Tires + Tire Shine</li><li> Engine Detailing</li><li><em> *RENEW Ceramic Spray Coating (Hyper Gloss) by System-X</em></li>
                   </ul>
                 </div>
               </details>
@@ -357,7 +780,7 @@
                 <summary>What's Included</summary>
                 <div class="dropdown-content">
                   <ul class="dropdown-list">
-                    <li>✓ Door Jamb Cleaning</li><li>✓ Deep Interior Vacuum</li><li>✓ Interior Window Cleaning</li><li>✓ Vinyl/Leather UV Protectant</li><li>✓ Interior Shampoo</li><li>✓ Extraction & Steam Clean</li><li><strong>Free Exterior Wash</strong></li><li><em>*We do not guarantee stains can be removed</em></li>
+                    <li> Door Jamb Cleaning</li><li> Deep Interior Vacuum</li><li> Interior Window Cleaning</li><li> Vinyl/Leather UV Protectant</li><li> Interior Shampoo</li><li> Extraction & Steam Clean</li><li><strong>Free Exterior Wash</strong></li><li><em>*We do not guarantee stains can be removed</em></li>
                   </ul>
                 </div>
               </details>
@@ -367,13 +790,13 @@
           <article class="service">
             <img src="images/image_5.jpg" alt="Executive Works Package" loading="lazy">
             <div class="svc-body">
-              <div class="svc-title">Executive Works Package <span style="opacity:.75)">• From $395</span></div>
+              <div class="svc-title">Executive Works Package <span style="opacity:.75">• From $395</span></div>
               <div class="svc-price">Interior + Exterior Max</div>
               <details class="dropdown">
                 <summary>What's Included</summary>
                 <div class="dropdown-content">
                   <ul class="dropdown-list">
-                    <li>✓ Exterior Wash & Wax</li><li>✓ Undercarriage Cleaning</li><li>✓ Windows (Inside & Out)</li><li>✓ Vinyl/Leather Cleaning</li><li>✓ UV Protectant</li><li>✓ Wheels & Tires + Tire Shine</li><li>✓ Interior Shampoo</li><li>✓ Extraction & Steam Clean</li><li>✓ Engine Detailing</li><li>✓ Anti-Bacterial Treatment</li><li><em>*RENEW Ceramic Spray Coating (Hyper Gloss) by System-X</em></li><li><em>**We do not guarantee stains can be removed</em></li>
+                    <li> Exterior Wash & Wax</li><li> Undercarriage Cleaning</li><li> Windows (Inside & Out)</li><li> Vinyl/Leather Cleaning</li><li> UV Protectant</li><li> Wheels & Tires + Tire Shine</li><li> Interior Shampoo</li><li> Extraction & Steam Clean</li><li> Engine Detailing</li><li> Anti-Bacterial Treatment</li><li><em>*RENEW Ceramic Spray Coating (Hyper Gloss) by System-X</em></li><li><em>**We do not guarantee stains can be removed</em></li>
                   </ul>
                 </div>
               </details>
@@ -389,8 +812,8 @@
                 <summary>What's Included</summary>
                 <div class="dropdown-content">
                   <ul class="dropdown-list">
-                    <li>✓ Exterior Wash</li><li>✓ Undercarriage Cleaning</li><li>✓ Door Jamb Cleaning</li><li>✓ Deep Interior Vacuum</li><li>✓ Exterior & Interior Windows</li><li>✓ Vinyl/Leather Cleaning</li><li>✓ UV Protectant Cream</li>
-                    <li><strong>*As per regulations, shampooing is not recommended due to possible mold acceleration*</strong></li>
+                    <li> Exterior Wash</li><li> Undercarriage Cleaning</li><li> Door Jamb Cleaning</li><li> Deep Interior Vacuum</li><li> Exterior & Interior Windows</li><li> Vinyl/Leather Cleaning</li><li> UV Protectant Cream</li>
+                    <li><em>*As per regulations, shampooing is not recommended due to possible mold acceleration*</em></li>
                   </ul>
                 </div>
               </details>
@@ -509,43 +932,49 @@
 
         <div class="booking-wrap">
           <div>
-            <form class="form" action="mailto:islandshinemsc@outlook.com" method="post" enctype="text/plain">
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-                <div><label for="fname">First Name *</label><input id="fname" name="First Name" required></div>
-                <div><label for="lname">Last Name *</label><input id="lname" name="Last Name" required></div>
-              </div>
+            <form id="booking-form" class="form" action="https://formspree.io/f/xanlgpjn" method="POST">
+  <input type="hidden" name="_subject" value="Island Shine Booking Request">
+  <input type="hidden" name="_template" value="table">
 
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-                <div><label for="email">Email *</label><input id="email" name="Email" type="email" required></div>
-                <div><label for="phone">Phone *</label><input id="phone" name="Phone" type="tel" required></div>
-              </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+    <div><label for="fname">First Name *</label><input id="fname" name="First Name" required></div>
+    <div><label for="lname">Last Name *</label><input id="lname" name="Last Name" required></div>
+  </div>
 
-              <div>
-                <label for="service-select">Select Service *</label>
-                <select id="service-select" name="Service" required>
-                  <option value="">Choose a package...</option>
-                  <option>Super Wash - $75</option>
-                  <option>IShine - $165</option>
-                  <option>Deluxe - $200</option>
-                  <option>Executive Interior - $245</option>
-                  <option>Executive Works - $395</option>
-                </select>
-              </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+    <div><label for="email">Email *</label><input id="email" name="Email" type="email" required></div>
+    <div><label for="phone">Phone *</label><input id="phone" name="Phone" type="tel" required></div>
+  </div>
 
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-                <div><label for="date">Preferred Date *</label><input id="date" name="Preferred Date" type="date" required></div>
-                <div><label for="time">Preferred Time *</label><input id="time" name="Preferred Time" type="time" required></div>
-              </div>
+  <div>
+    <label for="service-select">Select Service *</label>
+    <select id="service-select" name="Service" required>
+      <option value="">Choose a package...</option>
+      <option>Super Wash - $75</option>
+      <option>IShine - $165</option>
+      <option>Deluxe - $200</option>
+      <option>Executive Interior - $245</option>
+      <option>Executive Works - $395</option>
+    </select>
+  </div>
 
-              <div><label for="vehicle">Vehicle Make & Model</label><input id="vehicle" name="Vehicle" placeholder="e.g., 2020 Toyota Camry"></div>
-              <div><label for="addons">Additional Requests</label><textarea id="addons" name="Notes" rows="4" placeholder="Any special needs or add-on services?"></textarea></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+    <div><label for="date">Preferred Date *</label><input id="date" name="Preferred Date" type="date" required></div>
+    <div><label for="time">Preferred Time *</label><input id="time" name="Preferred Time" type="time" required></div>
+  </div>
 
-              <button type="submit" class="submit-big">Submit Request</button>
-              <div style="margin-top:12px;color:var(--muted);font-size:13px;text-align:center">
-                Or message us on
-                <a href="https://wa.me/16716464569?text=Hi!%20I%E2%80%99d%20like%20to%20book%20a%20service.%20Vehicle:%20____.%20When%20is%20your%20next%20opening%3F" target="_blank" rel="noopener" style="color:#cfe1ff;font-weight:800">WhatsApp</a>
-              </div>
-            </form>
+  <div><label for="vehicle">Vehicle Make & Model</label><input id="vehicle" name="Vehicle" placeholder="e.g., 2020 Toyota Camry"></div>
+  <div><label for="addons">Additional Requests</label><textarea id="addons" name="Notes" rows="4" placeholder="Any special needs or add-on services?"></textarea></div>
+
+  <button type="submit" class="submit-big">Submit Request</button>
+  <div id="form-status" class="form-status" aria-live="polite" style="margin-top:10px"></div>
+
+  <div style="margin-top:12px;color:var(--muted);font-size:13px;text-align:center">
+    Or message us on
+    <a href="https://wa.me/16716464569?text=Hi!%20I%E2%80%99d%20like%20to%20book%20a%20service.%20Vehicle:%20____.%20When%20is%20your%20next%20opening%3F"
+       target="_blank" rel="noopener" style="color:#cfe1ff;font-weight:800">WhatsApp</a>
+  </div>
+</form>    
           </div>
 
           <aside>
@@ -697,6 +1126,220 @@
         }
       });
     });
+
+    
   </script>
+
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const track = document.querySelector('.gallery-track');
+  if (!track) return;
+
+  // Clone all images once for continuous scroll
+  const slides = Array.from(track.children);
+  slides.forEach(slide => track.appendChild(slide.cloneNode(true)));
+
+  // Calculate actual width of one set
+  const oneSetWidth = track.scrollWidth / 2;
+
+  // Create exact keyframes for smooth looping
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes galleryLoop {
+      from { transform: translateX(0); }
+      to { transform: translateX(-${oneSetWidth}px); }
+    }
+  `;
+  document.head.appendChild(style);
+
+  // Pause on hover
+  track.addEventListener('mouseenter', () => track.style.animationPlayState = 'paused');
+  track.addEventListener('mouseleave', () => track.style.animationPlayState = 'running');
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const track = document.querySelector('.gallery-track');
+  const serviceImgs = Array.from(document.querySelectorAll('.service img'));
+  if (!track) return;
+
+  // 1) Add existing service images to the gallery (so they also appear there)
+  serviceImgs.forEach(img => {
+    const el = document.createElement('img');
+    el.src = img.getAttribute('src');
+    el.alt = img.getAttribute('alt') || 'Detailing result';
+    track.appendChild(el);
+  });
+
+  // 2) Replace first two service images with the truck photos
+  const trucks = ['images/car10.jpg','images/car11.jpg'];
+  serviceImgs.slice(0, 2).forEach((img, i) => {
+    img.src = trucks[i];
+    img.alt = i === 0
+      ? 'Truck detail — after finish'
+      : 'Truck exterior — premium wash & protect';
+  });
+
+  // 3) Also append the rest of your new truck photos directly to the gallery
+  ['images/car12.jpg','images/car13.jpg','images/car14.jpg'].forEach(src => {
+    const el = document.createElement('img');
+    el.src = src;
+    el.alt = 'Detailing result';
+    track.appendChild(el);
+  });
+
+  // 4) Build a perfect seamless loop: duplicate once & animate exact width
+  const originals = Array.from(track.children);
+  originals.forEach(slide => track.appendChild(slide.cloneNode(true)));
+
+  const oneSetWidth = track.scrollWidth / 2; // exact pixels incl. gaps/borders
+
+  // inject exact keyframes
+  const styleId = 'galleryLoopKF';
+  let styleEl = document.getElementById(styleId);
+  if (styleEl) styleEl.remove();
+  styleEl = document.createElement('style');
+  styleEl.id = styleId;
+  styleEl.textContent = `
+    @keyframes galleryLoop {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-${oneSetWidth}px); }
+    }
+  `;
+  document.head.appendChild(styleEl);
+
+
+
+  // Pause on hover
+  const wrapper = document.querySelector('.gallery-wrapper') || track.parentElement;
+  wrapper.addEventListener('mouseenter', () => track.style.animationPlayState = 'paused');
+  wrapper.addEventListener('mouseleave', () => track.style.animationPlayState = 'running');
+
+  // Recompute on resize (so the loop stays seamless)
+  let timer;
+  window.addEventListener('resize', () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      track.style.animation = 'none';
+      const newWidth = track.scrollWidth / 2;
+      styleEl.textContent = `
+        @keyframes galleryLoop {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-${newWidth}px); }
+        }
+      `;
+      void track.offsetWidth; // reflow
+    }, 150);
+  });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const SUBJECT = 'Island Shine Auto Detailing Inquiry';
+  const BODY = ''; // optional: put a default message here
+
+  document.querySelectorAll('a[href^="mailto:islandshinemsc@outlook.com"]').forEach(a => {
+    const href = a.getAttribute('href') || '';
+    const [base, qs] = href.split('?');
+    const params = new URLSearchParams(qs || '');
+    if (!params.has('subject')) params.set('subject', SUBJECT);
+    if (BODY && !params.has('body')) params.set('body', BODY);
+    a.setAttribute('href', `${base}?${params.toString()}`);
+  });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Customize these:
+  const SUBJECT = 'Island Shine Auto Detailing Inquiry';
+  const BODY = [
+    'Hi Island Shine Team,',
+    '',
+    'I’d like to book a detailing service.',
+    '',
+    'Vehicle: _____',
+    'Preferred Date: _____',
+    'Preferred Time: _____',
+    '',
+    'Thank you!'
+  ].join('\r\n'); // multiple lines
+
+  // Convert EVERY mailto: link to a Gmail compose link that opens in a new tab
+  document.querySelectorAll('a[href^="mailto:"]').forEach(a => {
+    const href = a.getAttribute('href') || '';
+    const email = href.replace(/^mailto:/i, '').split('?')[0].trim();
+    if (!email) return;
+
+    const gmailURL =
+      'https://mail.google.com/mail/?view=cm&fs=1'
+      + '&to='  + encodeURIComponent(email)
+      + '&su='  + encodeURIComponent(SUBJECT)
+      + '&body='+ encodeURIComponent(BODY);
+
+    a.setAttribute('href', gmailURL);
+    a.setAttribute('target', '_blank');
+    a.setAttribute('rel', 'noopener');
+  });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('booking-form');
+  const statusEl = document.getElementById('form-status');
+  if (!form || !statusEl) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const btn = form.querySelector('button[type="submit"]');
+    const restore = btn ? btn.textContent : '';
+    if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        form.reset();
+        statusEl.className = 'form-status success';
+        statusEl.textContent = '✅ Request sent! We’ll message you to confirm your appointment.';
+      } else {
+        const data = await res.json().catch(() => ({}));
+        const msg = (data && data.errors)
+          ? data.errors.map(e => e.message).join(', ')
+          : 'Something went wrong.';
+        throw new Error(msg);
+      }
+    } catch (err) {
+      statusEl.className = 'form-status error';
+      statusEl.textContent = '❌ Could not send. Please try again or message us directly on WhatsApp.';
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = restore; }
+    }
+  });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const track = document.querySelector('.gallery-track');
+  if (!track) return;
+  const DURATION = '120s'; // change to 90s/150s/180s if you want
+  const current = track.style.animation || '';
+  const replaced = current.replace(/galleryLoop\s+\d+(\.\d+)?s/i, `galleryLoop ${DURATION}`);
+  track.style.animation = replaced && replaced.includes('galleryLoop')
+    ? replaced
+    : `galleryLoop ${DURATION} linear infinite`;
+});
+</script>
+
+
 </body>
 </html>
