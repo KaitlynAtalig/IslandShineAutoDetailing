@@ -620,6 +620,36 @@ footer {
   .gallery-track img { width: 220px; height: 160px; }
 }
 
+.form-grid,
+.date-time-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 600px) {
+  .form-grid,
+  .date-time-grid {
+    grid-template-columns: 1fr; /* stack fields vertically on mobile */
+  }
+}
+
+.form-status {
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 12px;
+  border-radius: 10px;
+}
+.form-status.success {
+  background: rgba(59,209,125,.14);
+  border: 1px solid #2b6048;
+  color: #cfeedd;
+}
+.form-status.error {
+  background: rgba(255,80,80,.14);
+  border: 1px solid #6b2e2e;
+  color: #ffd6d6;
+}
 
 </style>
 </head>
@@ -929,12 +959,31 @@ footer {
       <div class="section-card">
         <h2>FAQ</h2>
         <div class="faq">
-          <details><summary>How long does a full interior detail take?</summary><p>Typically 3–4 hours depending on vehicle size and condition.</p></details>
-          <details><summary>Do you prep vehicles for PCS shipping?</summary><p>Yes. Our PCS Shipping Package follows the common carrier guidelines for Guam.</p></details>
-          <details><summary>Is ceramic coating worth it in Guam’s climate?</summary><p>Yes—ceramic helps resist salt air, UV, and frequent rain. We use System-X products.</p></details>
-          <details><summary>How much is a headlight restoration?</summary><p>Prices vary by vehicle; ask for the Shine &amp; Protect bundle to save when paired with wax.</p></details>
-          <details><summary>Do you accept walk-ins?</summary><p>Walk-ins welcome Mon–Sat 8:30–4:30, but appointments ensure the fastest turnaround.</p></details>
-        </div>
+          <details>
+            <summary>How long does a full interior detail take?</summary>
+            <p>Time varies based on the vehicle’s condition and size. A complete interior detail typically takes between half a day and a full day to ensure every surface is thoroughly cleaned and restored.</p>
+          </details>
+
+          <details>
+            <summary>Do you prep vehicles for PCS shipping?</summary>
+            <p>Yes, we do. Our PCS Shipping Package follows all standard carrier guidelines for Guam. We’ve been preparing vehicles for both military service members and private owners for over 15 years, ensuring every car meets shipping requirements with care and precision.</p>
+          </details>
+
+          <details>
+            <summary>Is ceramic coating worth it in Guam’s climate?</summary>
+            <p>Absolutely. Ceramic coating provides exceptional protection against Guam’s salt air, UV exposure, and frequent rain. We use System-X products, which offer long-lasting durability—typically lasting between 2 and 10 years depending on maintenance and environmental conditions.</p>
+          </details>
+
+          <details>
+            <summary>How much is a headlight restoration?</summary>
+            <p>Our headlight restoration services start at $75 for standard polishing and $155 when paired with ceramic coating protection for longer-lasting clarity and shine.</p>
+          </details>
+
+          <details>
+            <summary>Do you accept walk-ins?</summary>
+            <p>Yes, walk-ins are welcome Monday through Saturday from 8:30 AM to 4:30 PM. However, for larger detailing packages, we recommend scheduling an appointment with a security deposit to guarantee your preferred time slot.</p>
+          </details>
+
       </div>
     </section>
 
@@ -945,50 +994,74 @@ footer {
 
         <div class="booking-wrap">
           <div>
-            <form id="booking-form" class="form" action="https://formspree.io/f/xanlgpjn" method="POST">
-  <input type="hidden" name="_subject" value="Island Shine Booking Request">
-  <input type="hidden" name="_template" value="table">
+            <form id="booking-form" class="form" action="https://formspree.io/f/xpwogjbe" method="POST">
+            <input type="hidden" name="_subject" value="Island Shine Booking Request">
+            <input type="hidden" name="_template" value="table">
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-    <div><label for="fname">First Name *</label><input id="fname" name="First Name" required></div>
-    <div><label for="lname">Last Name *</label><input id="lname" name="Last Name" required></div>
-  </div>
+            <div class="form-grid">
+              <div>
+                <label for="fname">First Name *</label>
+                <input id="fname" name="First Name" required>
+              </div>
+              <div>
+                <label for="lname">Last Name *</label>
+                <input id="lname" name="Last Name" required>
+              </div>
+            </div>
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-    <div><label for="email">Email *</label><input id="email" name="Email" type="email" required></div>
-    <div><label for="phone">Phone *</label><input id="phone" name="Phone" type="tel" required></div>
-  </div>
+            <div class="form-grid">
+              <div>
+                <label for="email">Email *</label>
+                <input id="email" name="email" type="email" required>
+              </div>
+              <div>
+                <label for="phone">Phone *</label>
+                <input id="phone" name="Phone" type="tel" required>
+              </div>
+            </div>
 
-  <div>
-    <label for="service-select">Select Service *</label>
-    <select id="service-select" name="Service" required>
-      <option value="">Choose a package...</option>
-      <option>Super Wash - $75</option>
-      <option>IShine - $165</option>
-      <option>Deluxe - $200</option>
-      <option>Executive Interior - $245</option>
-      <option>Executive Works - $395</option>
-    </select>
-  </div>
+            <div>
+              <label for="service-select">Select Service *</label>
+              <select id="service-select" name="Service" required>
+                <option value="">Choose a package...</option>
+                <option>Super Wash - $75</option>
+                <option>IShine - $165</option>
+                <option>Deluxe - $200</option>
+                <option>Executive Interior - $245</option>
+                <option>Executive Works - $395</option>
+              </select>
+            </div>
 
-  <div class="date-time-grid">
-    <div><label for="date">Preferred Date *</label><input id="date" name="Preferred Date" type="date" required></div>
-    <div><label for="time">Preferred Time *</label><input id="time" name="Preferred Time" type="time" required></div>
-  </div>
+            <div class="date-time-grid">
+              <div>
+                <label for="date">Preferred Date *</label>
+                <input id="date" name="Preferred Date" type="date" required>
+              </div>
+              <div>
+                <label for="time">Preferred Time *</label>
+                <input id="time" name="Preferred Time" type="time" required>
+              </div>
+            </div>
 
+            <div>
+              <label for="vehicle">Vehicle Make & Model</label>
+              <input id="vehicle" name="Vehicle" placeholder="e.g., 2020 Toyota Camry">
+            </div>
 
-  <div><label for="vehicle">Vehicle Make & Model</label><input id="vehicle" name="Vehicle" placeholder="e.g., 2020 Toyota Camry"></div>
-  <div><label for="addons">Additional Requests</label><textarea id="addons" name="Notes" rows="4" placeholder="Any special needs or add-on services?"></textarea></div>
+            <div>
+              <label for="addons">Additional Requests</label>
+              <textarea id="addons" name="Notes" rows="4" placeholder="Any special needs or add-on services?"></textarea>
+            </div>
 
-  <button type="submit" class="submit-big">Submit Request</button>
-  <div id="form-status" class="form-status" aria-live="polite" style="margin-top:10px"></div>
+            <button type="submit" class="submit-big">Submit Request</button>
+            <div id="form-status" class="form-status" aria-live="polite" style="margin-top:10px"></div>
 
-  <div style="margin-top:12px;color:var(--muted);font-size:13px;text-align:center">
-    Or message us on
-    <a href="https://wa.me/16716464569?text=Hi!%20I%E2%80%99d%20like%20to%20book%20a%20service.%20Vehicle:%20____.%20When%20is%20your%20next%20opening%3F"
-       target="_blank" rel="noopener" style="color:#cfe1ff;font-weight:800">WhatsApp</a>
-  </div>
-</form>    
+            <div style="margin-top:12px;color:var(--muted);font-size:13px;text-align:center">
+              Or message us on
+              <a href="https://wa.me/16716464569?text=Hi!%20I%E2%80%99d%20like%20to%20book%20a%20service.%20Vehicle:%20____.%20When%20is%20your%20next%20opening%3F"
+                target="_blank" rel="noopener" style="color:#cfe1ff;font-weight:800">WhatsApp</a>
+            </div>
+          </form>
           </div>
 
           <aside>
@@ -1351,6 +1424,46 @@ document.addEventListener('DOMContentLoaded', () => {
   track.style.animation = replaced && replaced.includes('galleryLoop')
     ? replaced
     : `galleryLoop ${DURATION} linear infinite`;
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('booking-form');
+  const statusEl = document.getElementById('form-status');
+  if (!form || !statusEl) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]');
+    const restore = btn ? btn.textContent : '';
+    if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        form.reset();
+        statusEl.className = 'form-status success';
+        statusEl.textContent = '✅ Request sent! We’ll message you to confirm your appointment.';
+      } else {
+        const data = await res.json().catch(() => ({}));
+        const msg = (data && data.errors)
+          ? data.errors.map(e => e.message).join(', ')
+          : 'Something went wrong.';
+        throw new Error(msg);
+      }
+    } catch (err) {
+      statusEl.className = 'form-status error';
+      statusEl.textContent = '❌ Could not send. Please try again or WhatsApp us for a quick response.';
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = restore; }
+    }
+  });
 });
 </script>
 
