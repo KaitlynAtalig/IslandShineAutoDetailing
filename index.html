@@ -948,9 +948,17 @@ html::before {
 
 /* Force logo size */
 .brand img {
-  height: 120px !important;      /* make it taller */
-  transform: scale(1.7) !important; /* double its visible size */
+  height: 120px !important;
+  transform: scale(1.7) !important;
   transform-origin: left center !important;
+}
+
+/* Mobile: center the logo */
+@media (max-width: 768px) {
+  .brand img {
+    transform: scale(1.35) !important;
+    transform-origin: center center !important; /* Override the left center */
+  }
 }
 
 /* === Gallery item layout and captions === */
