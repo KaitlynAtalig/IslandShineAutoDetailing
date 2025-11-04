@@ -1910,33 +1910,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* Center logo on mobile */
 @media (max-width: 768px) {
-  .topbar img,
-  .nav-logo img,
-  .logo img {
+  .topbar {
+    justify-content: center;
+  }
+  
+  .brand {
+    justify-content: center;
+    gap: 0; /* Remove gap that offsets centering */
+  }
+  
+  .brand img {
+    transform: scale(1.35);
+    transform-origin: center center; /* ← Change from 'left center' to 'center center' */
     display: block;
-    margin: 0 auto;         /* centers horizontally */
+    margin: 0 auto;
   }
-
-  @media (max-width: 768px) {
-  .nav-logo {
+  
+  /* Hide or reposition nav elements so they don't affect logo centering */
+  .nav-links {
+    order: 3;
     width: 100%;
+    justify-content: center;
   }
 }
-
-@media (max-width: 768px) {
-  .nav-logo img {
-    transform: translateX(-2%);
-  }
-}
-
-
   .topbar,
   .nav,
   .nav-header {
     justify-content: center !important; /* ensures flex container centers child */
     text-align: center;
   }
-}
 
 @media (max-width: 768px) {
   .topbar,
