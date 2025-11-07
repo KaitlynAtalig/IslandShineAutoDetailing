@@ -36,7 +36,6 @@
   }
 }
 
-
   *{box-sizing:border-box}
   html,body{height:100%}
   body {
@@ -51,11 +50,10 @@
     radial-gradient(80rem 40rem at 10% 85%, rgba(120,180,255,0.07), transparent 65%),
     linear-gradient(180deg, #0a1228 0%, #0d1734 40%, #091027 100%),
     repeating-radial-gradient(circle at 30% 70%, rgba(255,255,255,0.03) 0 1px, transparent 1.3px);
-  background-attachment: fixed;
-  background-blend-mode: screen;
+    background-attachment: fixed;
+    background-blend-mode: screen;
   }
   
-
   body::after {
     content: "";
     position: fixed;
@@ -102,6 +100,7 @@
     transform-origin: left center;
 
   }
+
   @media (max-width:768px){ .brand img{ height:60px; } }
 
   .nav-links{display:flex;gap:8px;flex-wrap:wrap}
@@ -119,11 +118,11 @@
   color: #5ea8ff; /* neon-blue accent */
   font-weight: 600;
 }
+
 .contact-info a:hover {
   color: #89c3ff;
   text-decoration: underline;
 }
-
 
   .ci{display:inline-flex;gap:8px;align-items:center}
   .ci svg{width:18px;height:18px;stroke:#5c6a8d;stroke-width:2;fill:none}
@@ -138,9 +137,12 @@
     background-size:cover; background-position:center;
     color:#f5f8ff;
   }
+
   .hero::after{content:""; position:absolute; inset:0; z-index:-1;
     box-shadow:inset 0 -60px 120px rgba(10,18,40,.55);}
-  .hero-panel{width:100%; padding:64px 0 56px; text-align:center}
+  .hero-panel{
+    width:100%; 
+    padding:64px 0 56px; text-align:center}
   .hero h1{margin:0 0 10px;font-weight:900; font-size:clamp(28px,4.6vw,46px); line-height:1.12}
   .lead{color:#d7dfef;max-width:800px;margin:0 auto 18px;font-size:16px}
   .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
@@ -165,6 +167,13 @@
   .service{background:var(--surface);border:1px solid #243153;border-radius:12px;box-shadow:0 10px 22px rgba(0,0,0,.26);display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s,border-color .2s}
   .service:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(0,0,0,.32);border-color:#2a3a62}
   .service img{width:100%;height:220px;object-fit:cover;display:block;border-bottom:1px solid #243153;border-radius:12px 12px 0 0}
+  .service img{width:100%;height:220px;object-fit:cover;display:block;border-bottom:1px solid #243153;border-radius:12px 12px 0 0}
+
+  /* Override for Super Wash slider specifically */
+  #superwash-slider .svc-slide img {
+    object-fit: contain !important;
+    height: 100% !important;
+  }
   .svc-body{padding:16px;display:flex;flex-direction:column;gap:6px}
   .svc-title{font-weight:800;font-size:16px}
   .svc-price{color:#9bc4ff;font-weight:800;font-size:15px}
@@ -178,10 +187,12 @@ details.dropdown {
   overflow: hidden;
   transition: border-color .2s, background .2s;
 }
+
 details.dropdown[open] {
   background: rgba(124,169,255,.08);
   border-color: #2a3a62;
 }
+
 details.dropdown summary {
   cursor: pointer;
   list-style: none;
@@ -192,6 +203,7 @@ details.dropdown summary {
   color: #e5ecf8;
   transition: background .2s;
 }
+
 details.dropdown summary::-webkit-details-marker { display: none; }
 details.dropdown summary::after {
   content: "";
@@ -205,9 +217,11 @@ details.dropdown summary::after {
   transform: translateY(-60%) rotate(-45deg);
   transition: transform .2s;
 }
+
 details.dropdown[open] summary::after {
   transform: translateY(-40%) rotate(45deg);
 }
+
 .dropdown-content {
   overflow: hidden;
   height: 0;
@@ -215,6 +229,7 @@ details.dropdown[open] summary::after {
   transition: height .35s ease, padding .35s ease;
   will-change: height;
 }
+
 details.dropdown[open] .dropdown-content {
   padding-bottom: 12px;
 }
@@ -278,9 +293,127 @@ em {
   .feature-title{font-weight:800;margin-bottom:5px;font-size:15px;color:#fff}
   .feature-desc{color:var(--muted);font-size:13px;line-height:1.6}
 
-  /* Gallery */
-  .gallery-grid img{width:100%;height:200px;object-fit:cover;border-radius:12px;border:1px solid #243153;box-shadow:0 8px 18px rgba(0,0,0,.24)}
-  #gallery.show{display:block}
+/* Gallery */
+.gallery-grid img{width:100%;height:200px;object-fit:cover;border-radius:12px;border:1px solid #243153;box-shadow:0 8px 18px rgba(0,0,0,.24)}
+#gallery.show{display:block}
+
+/* Make the gallery horizontally scrollable (drag + swipe) */
+.gallery-wrapper{
+  overflow-x: auto;       /* was hidden */
+  overflow-y: hidden;
+  -ms-overflow-style: none;          /* IE/Edge hide scrollbar */
+  scrollbar-width: none;             /* Firefox hide scrollbar */
+}
+.gallery-wrapper::-webkit-scrollbar{ display:none; }
+
+.gallery-btn {
+  pointer-events: all;
+  appearance: none;
+  border: 1px solid #2a3a62;
+  background: linear-gradient(180deg, rgba(20,31,63,.96), rgba(15,26,51,.96));
+  color: #eaf0ff;
+  font-weight: 800;
+  padding: 12px 16px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(0,0,0,.25);
+  transition: transform .15s, box-shadow .15s, background .2s;
+  font-size: 20px;
+}
+
+.gallery-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 24px rgba(0,0,0,.3);
+}
+
+
+/* --- Super Wash inline slider (one-at-a-time) --- */
+.svc-slider {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/10;
+  background: #0a0f25;
+  border: 1px solid #243153;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+  box-shadow: 0 8px 18px rgba(0,0,0,.25);
+}
+.svc-slide {
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  opacity: 0; transform: scale(.98);
+  transition: opacity .25s ease, transform .25s ease;
+}
+.svc-slide.active { opacity: 1; transform: scale(1); }
+
+.svc-slide img {
+  width: 100% !important; 
+  height: 100% !important; 
+  object-fit: contain !important;
+  background-color: #0a0f25 !important;
+  display: block !important;
+}
+.svc-cap {
+  position: absolute; left: 8px; bottom: 8px;
+  background: rgba(10,18,40,.65);
+  color: #f5d76e; font-weight: 800; font-size: 13px;
+  padding: 6px 10px; border-radius: 999px;
+  border: 1px solid #243153;
+}
+.svc-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(15,26,51,.8);
+  border: 1px solid #2a3a62;
+  color: #eaf0ff; font-weight: 900;
+  border-radius: 10px; padding: 8px 10px; cursor: pointer;
+  user-select: none;
+}
+.svc-arrow:hover { filter: brightness(1.05); }
+.svc-prev { left: 8px; } .svc-next { right: 8px; }
+
+/* Lightbox */
+.lightbox {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(5,10,24,.92);
+  display: none; align-items: center; justify-content: center;
+  padding: 24px;
+  backdrop-filter: blur(8px);
+}
+
+.lightbox.open { display: flex; }
+.lightbox-inner {
+  position: relative; max-width: 92vw; max-height: 86vh;
+  display: grid; gap: 10px; justify-items: center;
+}
+.lightbox img {
+  max-width: 92vw; max-height: 76vh; object-fit: contain; border-radius: 12px;
+  border: 1px solid #243153; box-shadow: 0 14px 36px rgba(0,0,0,.45);
+}
+
+.lightbox .lb-caption { color:#f5d76e; font-weight: 800; text-align:center; }
+.lb-close, .lb-prev, .lb-next {
+  position: absolute; top: 8px;
+  background: rgba(10,18,40,.7); border: 1px solid #2a3a62; color: #eaf0ff;
+  font-weight: 900; padding: 8px 12px; border-radius: 10px; cursor: pointer;
+}
+
+.lb-close, .lb-prev, .lb-next {
+  position: absolute;
+  background: rgba(10,18,40,.85); border: 1px solid #2a3a62; color: #eaf0ff;
+  font-weight: 900; padding: 10px 14px; border-radius: 10px; cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 18px;
+}
+
+.lb-close:hover, .lb-prev:hover, .lb-next:hover {
+  background: rgba(10,18,40,1);
+  transform: scale(1.05);
+}
+
+.lb-close { top: 16px; right: 16px; }
+@media (max-width: 700px){
+  .lb-prev { left: 8px; } .lb-next { right: 8px; }
+}
 
   /* Before/After */
   .before-after{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:12px}
@@ -288,7 +421,7 @@ em {
   .ba-card img{width:100%;height:220px;object-fit:cover}
   .ba-tag{position:absolute;top:10px;left:10px;background:rgba(0,0,0,.55);color:#fff;padding:6px 10px;border-radius:999px;font-weight:900;font-size:12px}
 
-  /* Ala Carte */
+  /* A la Carte */
   .alacarte-grid.pretty{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:16px}
   .alacarte-item{display:flex;gap:14px;align-items:flex-start;padding:16px;border-radius:12px;background:var(--surface);border:1px solid #243153;box-shadow:0 8px 18px rgba(0,0,0,0.24)}
   .alacarte-icon{flex-shrink:0;width:42px;height:42px;border-radius:10px;display:grid;place-items:center;color:#cfdaf0;background:linear-gradient(135deg,rgba(124,169,255,.12),rgba(124,169,255,.10));border:1px solid #2a3a62}
@@ -395,8 +528,8 @@ em {
   @media (max-width:768px){ .sticky-call{display:block} .hero{min-height:58vh} }
   @media (max-width:640px){ .contact-info{display:none} .section-card{padding:20px} }
 
-  /* === Aesthetic polish overrides (non-destructive) === */
 
+/* === Aesthetic polish overrides (non-destructive) === */
 /* Keep logo big without shifting layout; scale down a touch on small screens */
 .brand img { transform: scale(1.6); transform-origin: left center; }
 @media (max-width: 820px) { .brand img { transform: scale(1.35); } }
@@ -494,7 +627,6 @@ em {
 }
 
 /* === ISLAND SHINE — PROFESSIONAL POLISH PACK (drop-in overrides) === */
-
 /* 0) Brand logo — keep large but stable */
 .brand img { transform: scale(1.6); transform-origin: left center; }
 @media (max-width: 820px){ .brand img{ transform: scale(1.35); } }
@@ -508,7 +640,7 @@ p, .lead { text-wrap: pretty; }
 section { padding: 44px 0; }           /* slightly airier */
 @media (max-width: 640px){ section{ padding: 36px 0; } }
 
-/* 2) Topbar — cleaner depth, crisper nav */
+/* 2 Topbar — cleaner depth, crisper nav */
 .topbar {
   box-shadow: 0 6px 22px rgba(10,18,40,.10);
   backdrop-filter: saturate(120%);
@@ -706,7 +838,6 @@ footer {
   box-shadow: 0 8px 18px rgba(0,0,0,0.25);
   transition: transform 0.3s ease;
 }
-
 
 .gallery-track img:hover {
   transform: scale(1.05);
@@ -926,7 +1057,6 @@ html::before {
   100% { background-position: 0 120px; }
 }
 
-
 /* Smooth shimmer drift motion */
 @keyframes sparkleShift {
   0%   { background-position: 0 0; }
@@ -1018,6 +1148,50 @@ html::before {
   .gallery-track { animation: none; }
 }
 
+/* Interactive gallery overrides */
+#gallery .gallery-wrapper{
+  overflow-x: auto;              /* allow user scroll/drag */
+  scroll-behavior: smooth;
+}
+#gallery .gallery-track{
+  animation: none;               /* JS handles the loop now */
+}
+#gallery .gallery-wrapper::-webkit-scrollbar{ display:none; }
+#gallery .gallery-wrapper{ scrollbar-width: none; }
+
+/* Lightbox arrows: match Super Wash + center on the image */
+.lightbox .lb-prev,
+.lightbox .lb-next{
+  top: 50%;                  /* center vertically on the image */
+  transform: translateY(-50%);
+  background: rgba(15,26,51,.8);
+  border: 1px solid #2a3a62;
+  color: #eaf0ff;
+  font-weight: 900;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 8px 18px rgba(0,0,0,.25);
+  z-index: 2050;
+}
+
+.lightbox .lb-prev { left: -56px; }   /* slightly outside the image */
+.lightbox .lb-next { right: -56px; }
+
+.lightbox .lb-prev:hover,
+.lightbox .lb-next:hover{
+  filter: brightness(1.05);
+  transform: translateY(-50%) scale(1.05);
+}
+
+/* smaller screens: keep arrows inside the image bounds */
+@media (max-width: 700px){
+  .lightbox .lb-prev { left: 8px; }
+  .lightbox .lb-next { right: 8px; }
+}
+
+
 </style>
 </head>
 <body>
@@ -1090,86 +1264,91 @@ html::before {
 </div>
 </header>
 
-
   <main class="wrap">
   <section id="gallery" class="show">
   <div class="section-card">
     <h2>Gallery</h2>
     <p class="sub">See the Island Shine difference — real results from our detailing experts.</p>
-
     <div class="gallery-wrapper">
-      <div class="gallery-track">
-        <!-- CERAMIC COATING -->
-        <div class="gallery-item">
-          <img src="images/ceramic_coating.jpg" alt="Ceramic Coating - After">
-          <span class="caption">Ceramic Coating</span>
-        </div>
+  <div class="gallery-track">
+    <!-- CERAMIC COATING -->
+    <div class="gallery-item">
+      <img src="images/ceramic_coating.jpg" alt="Ceramic Coating - After" onclick="openLightbox(this)" style="cursor:pointer;">
+      <span class="caption">Ceramic Coating</span>
+    </div>
 
-        <!-- EXTERIOR DETAILS -->
-        <div class="gallery-item">
-          <img src="images/car6.jpg" alt="Exterior Detail - Porsche After">
-          <span class="caption">Exterior Detail — After</span>
-        </div>
-        <div class="gallery-item">
-          <img src="images/car7.jpg" alt="Exterior Detail - White SUV">
-          <span class="caption">Exterior Detail — After</span>
-        </div>
-        <div class="gallery-item">
-          <img src="images/car8.jpg" alt="Exterior Detail - Black Bronco">
-          <span class="caption">Exterior Detail — After</span>
-        </div>
-        <div class="gallery-item">
-          <img src="images/car9.jpg" alt="Exterior Detail - Land Rover">
-          <span class="caption">Exterior Detail — After</span>
-        </div>
+    <!-- EXTERIOR DETAILS -->
+    <div class="gallery-item">
+      <img src="images/car6.jpg" alt="Exterior Detail - Porsche After" onclick="openLightbox(this)" style="cursor:pointer;">
+      <span class="caption">Exterior Detail — After</span>
+    </div>
+    <div class="gallery-item">
+      <img src="images/car7.jpg" alt="Exterior Detail - White SUV" onclick="openLightbox(this)" style="cursor:pointer;">
+      <span class="caption">Exterior Detail — After</span>
+    </div>
+    <div class="gallery-item">
+      <img src="images/car8.jpg" alt="Exterior Detail - Black Bronco" onclick="openLightbox(this)" style="cursor:pointer;">
+      <span class="caption">Exterior Detail — After</span>
+    </div>
+    <div class="gallery-item">
+      <img src="images/car9.jpg" alt="Exterior Detail - Land Rover" onclick="openLightbox(this)" style="cursor:pointer;">
+      <span class="caption">Exterior Detail — After</span>
+    </div>
 
-        <!-- HEADLIGHT RESTORATION -->
-        <div class="gallery-item">
-          <img src="images/b4.jpg" alt="Headlight Restoration - Before">
-          <span class="caption">Headlight Restoration — Before</span>
-        </div>
-        <div class="gallery-item">
-          <img src="images/after.jpg" alt="Headlight Restoration - After">
-          <span class="caption">Headlight Restoration — After</span>
-        </div>
+    <!-- HEADLIGHT RESTORATION -->
+    <div class="gallery-item">
+      <img src="images/b4.jpg" alt="Headlight Restoration - Before" onclick="openLightbox(this)" style="cursor:pointer;">
+      <span class="caption">Headlight Restoration — Before</span>
+    </div>
+    <div class="gallery-item">
+      <img src="images/after.jpg" alt="Headlight Restoration - After" onclick="openLightbox(this)" style="cursor:pointer;">
+      <span class="caption">Headlight Restoration — After</span>
+    </div>
 
-        <!-- INTERIOR DETAIL -->
-        <div class="gallery-item">
-          <img src="images/before2.jpg" alt="Interior Detail - Rear Seats Before">
-          <span class="caption">Interior Detail — Rear Seats Before</span>
-        </div>
-        <div class="gallery-item">
-          <img src="images/after2.jpg" alt="Interior Detail - Rear Seats After">
-          <span class="caption">Interior Detail — Rear Seats After</span>
-        </div>
-        <div class="gallery-item">
-          <img src="images/before1.jpg" alt="Interior Detail - Front Seats Before">
-          <span class="caption">Interior Detail — Front Seats Before</span>
-        </div>
-        <div class="gallery-item">
-          <img src="images/after 1.jpg" alt="Interior Detail - Front Seats After">
-          <span class="caption">Interior Detail — Front Seats After</span>
-        </div>
+    <!-- INTERIOR DETAIL -->
+    <div class="gallery-item">
+      <img src="images/before2.jpg" alt="Interior Detail - Rear Seats Before" onclick="openLightbox(this)" style="cursor:pointer;">
+      <span class="caption">Interior Detail — Rear Seats Before</span>
+    </div>
+    <div class="gallery-item">
+      <img src="images/after2.jpg" alt="Interior Detail - Rear Seats After" onclick="openLightbox(this)" style="cursor:pointer;">
+      <span class="caption">Interior Detail — Rear Seats After</span>
+    </div>
+    <div class="gallery-item">
+      <img src="images/before1.jpg" alt="Interior Detail - Front Seats Before" onclick="openLightbox(this)" style="cursor:pointer;">
+      <span class="caption">Interior Detail — Front Seats Before</span>
+    </div>
+    <div class="gallery-item">
+      <img src="images/after 1.jpg" alt="Interior Detail - Front Seats After" onclick="openLightbox(this)" style="cursor:pointer;">
+      <span class="caption">Interior Detail — Front Seats After</span>
+    </div>
 
-        <!-- ENGINE BAY DETAIL -->
-        <div class="gallery-item">
-          <img src="images/engineb4.jpg" alt="Engine Bay - Before">
-          <span class="caption">Engine Bay — Before</span>
-        </div>
-        <div class="gallery-item">
-          <img src="images/engineafter.jpg" alt="Engine Bay - After">
-          <span class="caption">Engine Bay — After</span>
-        </div>
-      </div>
+    <!-- ENGINE BAY DETAIL -->
+    <div class="gallery-item">
+      <img src="images/engineb4.jpg" alt="Engine Bay - Before" onclick="openLightbox(this)" style="cursor:pointer;">
+      <span class="caption">Engine Bay — Before</span>
+    </div>
+    <div class="gallery-item">
+      <img src="images/engineafter.jpg" alt="Engine Bay - After" onclick="openLightbox(this)" style="cursor:pointer;">
+      <span class="caption">Engine Bay — After</span>
     </div>
   </div>
-</section>
+    </div>
+  </div>
 
+<div class="gallery-nav" aria-hidden="true">
+  <button class="gal-prev" type="button" aria-label="Previous">◀</button>
+  <button class="gal-next" type="button" aria-label="Next">▶</button>
+</div>
+
+
+
+</section>
 
     <section>
       <div class="section-card">
         <h2>About Us</h2>
-        <p class="sub">Family-owned and operated, female veteran-led business with 28 years of experience. Detail-driven and dedicated to excellence. We pride ourselves on delivering exceptional quality, dependable service, and lasting results. Every project is approached with precision, integrity, and a commitment to exceeding expectations, because our reputation is built on your satisfaction.</p>
+        <p class="sub">Family-owned and operated, female veteran-led business with 15 years of experience. Detail-driven and dedicated to excellence. We pride ourselves on delivering exceptional quality, dependable service, and lasting results. Every project is approached with precision, integrity, and a commitment to exceeding expectations, because our reputation is built on your satisfaction.</p>
       </div>
     </section>
 
@@ -1208,21 +1387,66 @@ html::before {
         <p class="sub">Transparent pricing with packages designed for different needs and budgets.</p>
 
         <div class="services-grid">
-          <article class="service">
-            <img src="images/image_1.jpg" alt="Super Wash" loading="lazy">
-            <div class="svc-body">
-              <div class="svc-title">Super Wash <span style="opacity:.75">• From $75</span></div>
-              <div class="svc-price">Entry Clean</div>
-              <details class="dropdown">
-                <summary>What's Included</summary>
-                <div class="dropdown-content">
-                  <ul class="dropdown-list">
-                    <li> Exterior Wash</li><li> Interior Vacuum</li><li> Light Interior Wipe Down</li><li> Exterior & Interior Window Cleaning</li>
-                  </ul>
-                </div>
-              </details>
-            </div>
-          </article>
+          <article class="service" id="superwash-card">
+  <div class="svc-slider" id="superwash-slider" aria-label="Super Wash Before and After Gallery">
+  <!-- FRONT -->
+<div class="svc-slide active" data-cap="Front — Before">
+  <img src="images/superWash_b4.jpg" alt="Super Wash — Front Before"
+       style="width:100%;height:100%;object-fit:contain;background:#0a0f25;display:block;">
+  <span class="svc-cap">Front — Before</span>
+</div>
+<div class="svc-slide" data-cap="Front — After">
+  <img src="images/superWash_after_front_actual.jpg" alt="Super Wash — Front After"
+       style="width:100%;height:100%;object-fit:contain;background:#0a0f25;display:block;">
+  <span class="svc-cap">Front — After</span>
+</div>
+
+<!-- BACK -->
+<div class="svc-slide" data-cap="Back — Before">
+  <img src="images/superWash_b4_back.jpg" alt="Super Wash — Back Before"
+       style="width:100%;height:100%;object-fit:contain;background:#0a0f25;display:block;">
+  <span class="svc-cap">Back — Before</span>
+</div>
+<div class="svc-slide" data-cap="Back — After">
+  <img src="images/superWash_after_back.jpg" alt="Super Wash — Back After"
+       style="width:100%;height:100%;object-fit:contain;background:#0a0f25;display:block;">
+  <span class="svc-cap">Back — After</span>
+</div>
+
+<!-- TIRE -->
+<div class="svc-slide" data-cap="Tire — Before">
+  <img src="images/tire_b4_SWash.jpg" alt="Super Wash — Tire Before"
+       style="width:100%;height:100%;object-fit:contain;background:#0a0f25;display:block;">
+  <span class="svc-cap">Tire — Before</span>
+</div>
+<div class="svc-slide" data-cap="Tire — After">
+  <img src="images/tire_after_SWash.jpg" alt="Super Wash — Tire After"
+       style="width:100%;height:100%;object-fit:contain;background:#0a0f25;display:block;">
+  <span class="svc-cap">Tire — After</span>
+</div>
+
+
+  <button class="svc-arrow svc-prev" type="button" aria-label="Previous">◀</button>
+  <button class="svc-arrow svc-next" type="button" aria-label="Next">▶</button>
+</div>
+
+  <div class="svc-body">
+    <div class="svc-title">Super Wash <span style="opacity:.75">• From $75</span></div>
+    <div class="svc-price">Entry Clean</div>
+
+    <details class="dropdown">
+      <summary>What's Included</summary>
+      <div class="dropdown-content">
+        <ul class="dropdown-list">
+          <li> Exterior Wash</li>
+          <li> Interior Vacuum</li>
+          <li> Light Interior Wipe Down</li>
+          <li> Exterior &amp; Interior Window Cleaning</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</article>
 
           <article class="service">
             <img src="images/image_2.jpg" alt="IShine" loading="lazy">
@@ -1311,7 +1535,7 @@ html::before {
     <!-- Ala Carte + Bundles -->
     <section id="alacarte">
       <div class="section-card">
-        <h2>Ala Carte Services</h2>
+        <h2>A la Carte Services</h2>
         <p class="sub">Add these to any package or book individually. Contact us for pricing.</p>
 
         <div class="alacarte-grid pretty">
@@ -1425,7 +1649,50 @@ html::before {
             <summary>Do you accept walk-ins?</summary>
             <p>Yes, walk-ins are welcome Monday through Saturday from 8:30 AM to 4:30 PM. However, for larger detailing packages, we recommend scheduling an appointment with a security deposit to guarantee your preferred time slot.</p>
           </details>
+      </div>
+    </section>
 
+    <!-- Reviews Section (single, final) -->
+    <section id="reviews">
+      <div class="section-card reviews-cta">
+        <h2>Leave a Review</h2>
+        <p class="sub">We’d love your feedback — help others discover Island Shine!</p>
+
+        <div class="reviews-grid">
+          <!-- Google Review -->
+          <div class="review-card">
+            <div class="review-left">
+              <div class="review-logo" aria-label="Google">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google logo">
+              </div>
+              <div>
+                <div class="review-title">Review us on Google</div>
+                <div class="review-sub">Your words help us grow 🌱</div>
+              </div>
+            </div>
+            <a class="review-btn btn-google"
+              href="https://www.google.com/maps/place/Island+Shine+Auto+Detailing/@13.5006501,144.7787502,17z/data=!4m8!3m7!1s0x671f79ee3ff06d97:0x33cc0bdedb80ba77!8m2!3d13.5006501!4d144.7813305!9m1!1b1!16s%2Fg%2F11q1tb7x2d?entry=ttu&g_ep=EgoyMDI1MTEwMi4wIKXMDSoASAFQAw%3D%3D"
+              target="_blank" rel="noopener">Write a Google Review</a>
+          </div>
+
+          <!-- Yelp Review -->
+          <div class="review-card">
+            <div class="review-left">
+              <div class="review-logo" aria-label="Yelp">
+               <img src="images/yelp.png" alt="Yelp logo"
+     style="width:85px;height:85px;border-radius:50%;object-fit:contain;
+            display:block;margin:0 auto;box-shadow:0 4px 12px rgba(0,0,0,.35);">
+              </div>
+              <div>
+                <div class="review-title">Review us on Yelp</div>
+                <div class="review-sub">Quick note + photo of your result = ✨</div>
+              </div>
+            </div>
+            <a class="review-btn btn-yelp"
+              href="https://www.yelp.com/biz/island-shine-auto-detailing-services-tamuning-2?osq=Island+Shine&override_cta=Get+pricing"
+              target="_blank" rel="noopener">Write a Yelp Review</a>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1576,7 +1843,6 @@ html::before {
   </div>
 </div>
 
-
             <div class="contact-card" style="margin-top:14px">
               <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m3 8 9 6 9-6"/></svg>
               <div>
@@ -1677,6 +1943,79 @@ html::before {
 
     
   </script>
+<script>
+// ===== GALLERY LIGHTBOX =====
+let currentLightboxIndex = 0;
+let galleryImages = [];
+
+function openLightbox(imgElement) {
+  const lb = document.getElementById('lb');
+  const lbImg = document.getElementById('lb-img');
+  const lbCap = document.getElementById('lb-cap');
+  
+  // Get all gallery images
+  galleryImages = Array.from(document.querySelectorAll('.gallery-item img'));
+  currentLightboxIndex = galleryImages.indexOf(imgElement);
+  
+  // Show lightbox
+  lbImg.src = imgElement.src;
+  lbImg.alt = imgElement.alt;
+  lbCap.textContent = imgElement.nextElementSibling?.textContent || '';
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  const lb = document.getElementById('lb');
+  lb.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function lightboxNav(direction) {
+  currentLightboxIndex = (currentLightboxIndex + direction + galleryImages.length) % galleryImages.length;
+  const img = galleryImages[currentLightboxIndex];
+  document.getElementById('lb-img').src = img.src;
+  document.getElementById('lb-img').alt = img.alt;
+  document.getElementById('lb-cap').textContent = img.nextElementSibling?.textContent || '';
+}
+
+// Lightbox event listeners
+document.addEventListener('DOMContentLoaded', () => {
+  const lb = document.getElementById('lb');
+  
+  document.querySelector('.lb-close')?.addEventListener('click', closeLightbox);
+  document.querySelector('.lb-prev')?.addEventListener('click', () => lightboxNav(-1));
+  document.querySelector('.lb-next')?.addEventListener('click', () => lightboxNav(1));
+  
+  lb?.addEventListener('click', (e) => {
+    if (e.target === lb) closeLightbox();
+  });
+  
+  document.addEventListener('keydown', (e) => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') lightboxNav(-1);
+    if (e.key === 'ArrowRight') lightboxNav(1);
+  });
+});
+
+// ===== GALLERY ARROW NAVIGATION =====
+document.addEventListener('DOMContentLoaded', () => {
+  const wrapper = document.querySelector('.gallery-wrapper');
+  const prevBtn = document.querySelector('.gal-prev');
+  const nextBtn = document.querySelector('.gal-next');
+  
+  if (!wrapper || !prevBtn || !nextBtn) return;
+  
+  prevBtn.addEventListener('click', () => {
+    wrapper.scrollBy({ left: -320, behavior: 'smooth' });
+  });
+  
+  nextBtn.addEventListener('click', () => {
+    wrapper.scrollBy({ left: 320, behavior: 'smooth' });
+  });
+});
+</script>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -1776,6 +2115,48 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <style>
+
+/* Anchor arrows to the gallery like Super Wash (adjusted position) */
+#gallery { position: relative; }
+
+#gallery .gallery-nav {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+#gallery .gal-prev,
+#gallery .gal-next {
+  position: absolute;
+  /* Move down below the title and subtext */
+  top: calc(50% + 40px); /* adjust this value until perfectly centered with photos */
+  transform: translateY(-50%);
+  pointer-events: all;
+
+  background: rgba(15,26,51,.8);
+  border: 1px solid #2a3a62;
+  color: #eaf0ff;
+  font-weight: 900;
+  padding: 8px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 8px 18px rgba(0,0,0,.25);
+}
+
+#gallery .gal-prev { left: 8px; }
+#gallery .gal-next { right: 8px; }
+
+#gallery .gal-prev:hover,
+#gallery .gal-next:hover { filter: brightness(1.05); }
+
+/* mobile tweak */
+@media (max-width: 700px){
+  #gallery .gal-prev { left: 8px; }
+  #gallery .gal-next { right: 8px; }
+}
+
   .mobile-cta-bar{
   position: fixed !important;
   left: 0;
@@ -1886,6 +2267,341 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 }
 
+/* Center images inside Super Wash slides */
+#superwash-card .svc-slide{
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* Make Super Wash images fill box without distortion */
+#superwash-slider img {
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;        /* keeps proportions */
+  object-position: center;    /* centers image */
+  background-color: #0a0f25;  /* dark background */
+  transition: transform .3s ease-in-out;
+}
+
+/* Slight enlargement for better fit */
+#superwash-slider .svc-slide.active img {
+  transform: scale(1.08);     /* gentle zoom-in that doesn’t crop */
+}
+
+/* === Super Wash Gallery — Enlarged View without Distortion === */
+#superwash-card .svc-slider {
+  aspect-ratio: 16 / 9;
+  height: 380px; /* enlarge box height */
+  background: #0a0f25;
+}
+
+#superwash-card .svc-slide {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+#superwash-card .svc-slide img {
+  max-height: 100% !important;
+  max-width: 100% !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
+  transform: scale(1.15); /* enlarge slightly */
+  transition: transform 0.3s ease-in-out;
+}
+
+#superwash-card .svc-slide.active img {
+  transform: scale(1.25); /* gently zoom active image */
+}
+
+/* Front After photo fix — show full image without zoom-crop */
+#superwash-slider img[alt="Super Wash — Front After"] {
+  object-fit: contain !important;   /* stop cropping */
+  transform: scale(1.0) !important; /* remove extra zoom */
+}
+
+/* ===== Reviews CTA ===== */
+.reviews-cta.section-card{ display:grid; gap:16px; }
+.reviews-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap:14px;
+}
+.review-card{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px; padding:16px; border-radius:12px;
+  background: linear-gradient(180deg, rgba(20,31,63,.96), rgba(15,26,51,.96));
+  border:1px solid #243153; box-shadow:0 10px 22px rgba(0,0,0,.26);
+}
+.review-left{display:flex; align-items:center; gap:12px}
+.review-logo{
+  width:42px; height:42px;
+  border-radius:10px;
+  display:grid;
+  place-items:center;
+  background:#0a1228;
+  border:1px solid #2a3a62;
+  box-shadow:0 0 10px rgba(245,215,110,.15);
+}
+.review-logo svg{
+  width:28px;
+  height:28px;
+}
+.review-title{font-weight:800; font-size:16px}
+.review-sub{color:#b9c5da; font-size:13px}
+.review-btn{
+  appearance:none; border:0; cursor:pointer; font-weight:800;
+  padding:10px 14px; border-radius:10px; color:#0a1328;
+  box-shadow:0 10px 22px rgba(0,0,0,.22); text-decoration:none; display:inline-block;
+}
+.btn-google{ background:linear-gradient(135deg,#fee082,#f5d76e); }
+.btn-yelp{   background:linear-gradient(135deg,#ff6a6a,#ff3b30); color:#fff; }
+.review-btn:hover{ transform:translateY(-1px); box-shadow:0 14px 28px rgba(0,0,0,.28); }
+
+/* ===== Reviews CTA ===== */
+.reviews-cta.section-card{ display:grid; gap:16px; }
+.reviews-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap:14px;
+}
+
+.review-left{display:flex; align-items:center; gap:12px}
+.review-title{font-weight:800; font-size:16px}
+.review-sub{color:#b9c5da; font-size:13px}
+
+.reviews-cta {
+  display: grid;
+  gap: 16px;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.review-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(20,31,63,0.96), rgba(15,26,51,0.96));
+  border: 1px solid #243153;
+  box-shadow: 0 10px 22px rgba(0,0,0,0.26);
+}
+
+.review-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.review-logo {
+  width: 60px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: none;
+}
+
+.review-logo img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.review-title {
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.review-sub {
+  color: #b9c5da;
+  font-size: 13px;
+}
+
+.review-btn {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  font-weight: 800;
+  padding: 10px 14px;
+  border-radius: 10px;
+  color: #0a1328;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 10px 22px rgba(0,0,0,0.22);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-google {
+  background: linear-gradient(135deg, #fee082, #f5d76e);
+}
+
+.btn-yelp {
+  background: linear-gradient(135deg, #ff6a6a, #ff3b30);
+  color: #fff;
+}
+
+.review-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.28);
+}
+
+/* ===== Reviews (scoped so nothing else breaks) ===== */
+#reviews .reviews-cta{ display:grid; gap:16px; }
+#reviews .reviews-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap:14px;
+}
+#reviews .review-card{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px; padding:16px; border-radius:12px;
+  background: linear-gradient(180deg, rgba(20,31,63,.96), rgba(15,26,51,.96));
+  border:1px solid #243153; box-shadow:0 10px 22px rgba(0,0,0,.26);
+}
+#reviews .review-left{display:flex; align-items:center; gap:12px}
+#reviews .review-logo{
+  width:60px; height:40px; display:grid; place-items:center;
+  background:transparent; border:none; padding:0; margin:0;
+}
+#reviews .review-logo svg{
+  width:100%; height:auto; display:block;
+}
+#reviews .review-title{font-weight:800; font-size:16px}
+#reviews .review-sub{color:#b9c5da; font-size:13px}
+#reviews .review-btn{
+  appearance:none; border:0; cursor:pointer; font-weight:800;
+  padding:10px 14px; border-radius:10px; color:#0a1328;
+  text-decoration:none; display:inline-block;
+  box-shadow:0 10px 22px rgba(0,0,0,.22);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+#reviews .btn-google{ background:linear-gradient(135deg,#fee082,#f5d76e); }
+#reviews .btn-yelp{   background:linear-gradient(135deg,#ff6a6a,#ff3b30); color:#fff; }
+#reviews .review-btn:hover{ transform:translateY(-1px); box-shadow:0 14px 28px rgba(0,0,0,.28); }
+
+/* Yelp + Google review logos */
+#reviews .review-logo {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  background: #0a1228;
+  border-radius: 50%;
+  border: 1px solid #2a3a62;
+  overflow: hidden;
+}
+#reviews .review-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+footer img:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 14px rgba(255, 255, 255, 0.25);
+}
+
+#reviews .review-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#reviews .review-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Restore gallery arrows to be anchored to the gallery only */
+#gallery { position: relative; }
+
+#gallery .gallery-nav{
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+#gallery .gal-prev,
+#gallery .gal-next{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: all;
+  width: 44px; height: 44px; border-radius: 50%;
+  appearance: none;
+  border: 1px solid #2a3a62;
+  background: linear-gradient(180deg, rgba(20,31,63,.96), rgba(15,26,51,.96));
+  color: #eaf0ff; font-weight: 800; cursor: pointer;
+  box-shadow: 0 8px 18px rgba(0,0,0,.25);
+  transition: transform .15s, box-shadow .15s;
+}
+
+#gallery .gal-prev { left: -18px; }  /* nudge outside the photos */
+#gallery .gal-next { right: -18px; }
+
+#gallery .gal-prev:hover,
+#gallery .gal-next:hover{
+  transform: translateY(-50%) scale(1.08);
+  box-shadow: 0 12px 24px rgba(0,0,0,.32);
+}
+
+/* mobile: keep buttons inside so they don't clip */
+@media (max-width: 700px){
+  #gallery .gal-prev { left: 8px; }
+  #gallery .gal-next { right: 8px; }
+}
+
+/* --- Gallery Arrows (Super Wash style alignment) --- */
+#gallery { position: relative; }
+
+#gallery .gallery-nav {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+#gallery .gal-prev,
+#gallery .gal-next {
+  position: absolute;
+  top: 58%; /* moves arrows lower, in line with photo row */
+  transform: translateY(-50%);
+  pointer-events: all;
+  background: rgba(15,26,51,.8);
+  border: 1px solid #2a3a62;
+  color: #eaf0ff;
+  font-weight: 900;
+  padding: 8px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 8px 18px rgba(0,0,0,.25);
+}
+
+#gallery .gal-prev { left: 8px; }
+#gallery .gal-next { right: 8px; }
+
+#gallery .gal-prev:hover,
+#gallery .gal-next:hover {
+  filter: brightness(1.05);
+}
+
+@media (max-width: 700px){
+  #gallery .gal-prev { left: 8px; }
+  #gallery .gal-next { right: 8px; }
+}
+
 
 </style>
 
@@ -1895,6 +2611,56 @@ document.addEventListener('DOMContentLoaded', () => {
      target="_blank" rel="noopener">WhatsApp</a>
   <a class="call" href="tel:+16716464569">Call</a>
 </div>
+
+<script>
+(function(){
+  const slider = document.getElementById('superwash-slider');
+  if(!slider) return;
+
+  const slides = Array.from(slider.querySelectorAll('.svc-slide'));
+  const prevBtn = slider.querySelector('.svc-prev');
+  const nextBtn = slider.querySelector('.svc-next');
+
+  let i = 0;
+  function show(n){
+    i = (n + slides.length) % slides.length;
+    slides.forEach((s,idx)=> s.classList.toggle('active', idx === i));
+  }
+
+  prevBtn.addEventListener('click', ()=> show(i - 1));
+  nextBtn.addEventListener('click', ()=> show(i + 1));
+
+  // swipe/touch
+  let sx = null;
+  slider.addEventListener('touchstart', e => sx = e.changedTouches[0].clientX, {passive:true});
+  slider.addEventListener('touchend', e => {
+    if(sx == null) return;
+    const dx = e.changedTouches[0].clientX - sx;
+    if(Math.abs(dx) > 40) (dx < 0 ? nextBtn : prevBtn).click();
+    sx = null;
+  }, {passive:true});
+
+  // keyboard when focused
+  slider.tabIndex = 0;
+  slider.addEventListener('keydown', e=>{
+    if(e.key === 'ArrowLeft') prevBtn.click();
+    if(e.key === 'ArrowRight') nextBtn.click();
+  });
+})();
+</script>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lb">
+  <div class="lightbox-inner">
+    <img id="lb-img" alt="">
+    <div class="lb-caption" id="lb-cap"></div>
+    <button class="lb-close" aria-label="Close">✕</button>
+    <button class="lb-prev"  aria-label="Previous">◀</button>
+    <button class="lb-next"  aria-label="Next">▶</button>
+  </div>
+</div>
+
+
 
 </body>
 </html>
