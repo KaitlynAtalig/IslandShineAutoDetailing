@@ -1203,14 +1203,14 @@ html { scroll-behavior: smooth; }
 
 @media (max-width: 700px){
   html, body {
-    overscroll-behavior-y: contain;   /* tames rubber-banding */
-    -webkit-overflow-scrolling: touch;/* momentum on iOS */
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
   }
-  
-  /* Reduce heavy effects on mobile to prevent jank */
-  body::before,
-  body::after,
-  html::before { animation: none !important; opacity: .08 !important; }
+
+  /* Keep shimmer visible but lighter to avoid lag */
+  body::before  { animation: sparkleDrift 26s linear infinite;  opacity: .15; }
+  body::after   { animation: sweep 12s ease-in-out infinite;    opacity: .2; }
+  html::before  { animation: sparkleShift 1.2s linear infinite; opacity: .15; }
 }
 
 /* --- Match booking form font with site-wide typography --- */
