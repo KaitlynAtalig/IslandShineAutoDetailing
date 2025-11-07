@@ -1383,7 +1383,6 @@ html { scroll-behavior: smooth; }
 </div>
 
 
-
 </section>
 
     <section>
@@ -1488,7 +1487,6 @@ html { scroll-behavior: smooth; }
     </details>
   </div>
 </article>
-
           <article class="service">
             <img src="images/image_2.jpg" alt="IShine" loading="lazy">
             <div class="svc-body">
@@ -1928,6 +1926,9 @@ html { scroll-behavior: smooth; }
       <div style="font-weight:700;color:#e8eef7;margin-bottom:6px">© 2025 Island Shine Auto Detailing</div>
       <div style="color:#a8b3c7;font-size:13px">Insured • Locally Owned • Auto detailing in Tamuning, Guam</div>
     </div>
+
+    <!-- Sentinel that tells us when we're near the footer -->
+    <div id="footer-sentinel" style="height:1px;"></div>
   </footer>
 
   <!-- Sticky WhatsApp Bar (mobile) -->
@@ -2706,6 +2707,30 @@ footer img:hover {
   }
 }
 
+/* --- Sticky bar helpers --- */
+:root { --stickyH: 62px; }  /* default; JS will update exact height */
+
+.sticky-call {
+  will-change: transform;
+  transition: transform .25s ease, opacity .2s ease;
+}
+
+/* move it off-screen when we want it hidden (e.g., over footer or during downward scroll) */
+.sticky-call.is-hidden {
+  transform: translateY(110%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* add bottom padding only when the bar is visible */
+body.sticky-space {
+  padding-bottom: calc(var(--stickyH) + env(safe-area-inset-bottom));
+}
+
+/* make sure footer text never tucks under rounded corners on iOS */
+footer { padding-bottom: max(28px, env(safe-area-inset-bottom)); }
+
+
 </style>
 
 <div class="mobile-cta-bar" aria-label="Quick contact">
@@ -2769,6 +2794,60 @@ footer img:hover {
   window.addEventListener('touchstart', ()=>{}, opts);
   window.addEventListener('touchmove',  ()=>{}, opts);
   window.addEventListener('wheel',      ()=>{}, opts);
+</script>
+
+<script>
+(function(){
+  const sticky = document.querySelector('.sticky-call');
+  if (!sticky) return;
+
+  // 1) Measure the sticky height and reserve space only while visible
+  function setStickyHeight(){
+    document.documentElement.style.setProperty('--stickyH', sticky.offsetHeight + 'px');
+  }
+  function showSpace(enable){
+    document.body.classList.toggle('sticky-space', !!enable);
+  }
+  setStickyHeight();
+  showSpace(true);
+  window.addEventListener('resize', setStickyHeight);
+
+  // 2) Hide sticky when the footer is scrolled into view
+  const sentinel = document.getElementById('footer-sentinel');
+  if (sentinel) {
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        const nearFooter = e.isIntersecting;
+        sticky.classList.toggle('is-hidden', nearFooter);
+        // Remove the extra padding when hidden so there's no "big gap"
+        showSpace(!nearFooter);
+      }
+    }, { root: null, threshold: 0, rootMargin: '0px 0px -10% 0px' });
+    io.observe(sentinel);
+  }
+
+  // 3) Optional: hide while user scrolls DOWN, show on scroll UP
+  let lastY = window.scrollY;
+  let raf = null;
+  function onScroll(){
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      const y = window.scrollY;
+      const goingDown = y > lastY + 6;
+      const goingUp   = y < lastY - 6;
+      if (goingDown) {
+        sticky.classList.add('is-hidden');
+        showSpace(false);
+      } else if (goingUp) {
+        sticky.classList.remove('is-hidden');
+        showSpace(true);
+      }
+      lastY = y;
+      raf = null;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
 </script>
 
 
