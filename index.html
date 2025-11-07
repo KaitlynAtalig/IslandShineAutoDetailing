@@ -326,7 +326,6 @@ em {
   box-shadow: 0 12px 24px rgba(0,0,0,.3);
 }
 
-
 /* --- Super Wash inline slider (one-at-a-time) --- */
 .svc-slider {
   position: relative;
@@ -1191,6 +1190,20 @@ html::before {
   .lightbox .lb-next { right: 8px; }
 }
 
+/* --- Mobile smooth scrolling: site-wide --- */
+html { scroll-behavior: smooth; }
+
+@media (max-width: 700px){
+  html, body {
+    overscroll-behavior-y: contain;   /* tames rubber-banding */
+    -webkit-overflow-scrolling: touch;/* momentum on iOS */
+  }
+  
+  /* Reduce heavy effects on mobile to prevent jank */
+  body::before,
+  body::after,
+  html::before { animation: none !important; opacity: .08 !important; }
+}
 
 </style>
 </head>
@@ -2075,6 +2088,23 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const wrap = document.querySelector('#gallery .gallery-wrapper');
+    const track = document.querySelector('#gallery .gallery-track');
+    if (!wrap || !track) return;
+
+    let touching = false;
+    const stop = () => { track.style.animationPlayState = 'paused'; };
+    const start = () => { track.style.animationPlayState = 'running'; };
+
+    wrap.addEventListener('touchstart', () => { touching = true; stop(); }, { passive: true });
+    wrap.addEventListener('touchend',   () => { touching = false; start(); }, { passive: true });
+    wrap.addEventListener('touchcancel',() => { touching = false; start(); }, { passive: true });
+  });
+</script>
+
+
+<script>
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('booking-form');
   const statusEl = document.getElementById('form-status');
@@ -2705,6 +2735,13 @@ footer img:hover {
   </div>
 </div>
 
+<script>
+  // Make touch/scroll listeners passive for smoother scrolling on mobile
+  const opts = { passive: true };
+  window.addEventListener('touchstart', ()=>{}, opts);
+  window.addEventListener('touchmove',  ()=>{}, opts);
+  window.addEventListener('wheel',      ()=>{}, opts);
+</script>
 
 
 </body>
