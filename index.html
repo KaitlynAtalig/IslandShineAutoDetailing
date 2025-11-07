@@ -2091,21 +2091,16 @@ html { scroll-behavior: smooth; }
     </section>
   </main>
 
-  <footer>
-      <div class="wrap" style="text-align:center;margin-top:60px;padding:40px 0;border-top:1px solid #243153;">
-      <div style="font-weight:800;color:#f5d76e;margin-bottom:8px;font-size:1.1rem;">
-        Keeping Your Rides Island Fresh Since 2010
-      </div>
-      <div style="font-weight:700;color:#e8eef7;margin-bottom:6px">
-        © 2025 Island Shine Auto Detailing
-      </div>
-      <div style="color:#a8b3c7;font-size:13px">
-        Insured • Locally Owned • Auto Detailing in Tamuning, Guam
-      </div>
-    </div>
-    <!-- Sentinel that tells us when we're near the footer -->
-    <div id="footer-sentinel" style="height:1px;"></div>
-  </footer>
+ <footer>
+  <div class="wrap">
+    <div style="font-weight:800;color:#f5d76e;margin-bottom:6px;font-size:1rem;">
+    Keeping Your Rides Island Fresh Since 2010
+  </div>
+    <div style="font-weight:700;color:#e8eef7;margin-bottom:6px">© 2025 Island Shine Auto Detailing</div>
+    <div style="color:#a8b3c7;font-size:13px">Insured • Locally Owned • Auto detailing in Tamuning, Guam</div>
+  </div>
+  <div id="footer-sentinel" style="height:1px;"></div>
+</footer>
 
   <!-- Sticky WhatsApp Bar (mobile) -->
   <div class="sticky-call">
@@ -2951,6 +2946,13 @@ footer { padding-bottom: max(28px, env(safe-area-inset-bottom)); }
   margin-top: 6px;
   margin-bottom: 6px;
 }
+
+/* Tighten space before and inside the footer */
+main > section:last-of-type { padding-bottom: 16px !important; }
+
+footer { padding: 14px 0 !important; margin-top: 12px !important; }
+footer .wrap > div { margin-bottom: 4px; }
+footer .wrap > div:last-child { margin-bottom: 0; }
 
 </style>
 
