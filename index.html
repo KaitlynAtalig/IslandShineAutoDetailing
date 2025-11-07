@@ -2708,29 +2708,19 @@ footer img:hover {
 }
 
 /* --- Sticky bar helpers --- */
-:root { --stickyH: 62px; }  /* default; JS will update exact height */
-
 .sticky-call {
   will-change: transform;
-  transition: transform .25s ease, opacity .2s ease;
+  transition: transform .3s ease-in-out;
 }
 
-/* move it off-screen when we want it hidden (e.g., over footer or during downward scroll) */
+/* move it off-screen when hidden */
 .sticky-call.is-hidden {
-  transform: translateY(110%);
-  opacity: 0;
+  transform: translateY(100%);
   pointer-events: none;
-}
-
-/* add bottom padding only when the bar is visible */
-body.sticky-space {
-  padding-bottom: calc(var(--stickyH) + env(safe-area-inset-bottom));
 }
 
 /* make sure footer text never tucks under rounded corners on iOS */
 footer { padding-bottom: max(28px, env(safe-area-inset-bottom)); }
-
-
 </style>
 
 <div class="mobile-cta-bar" aria-label="Quick contact">
@@ -2801,55 +2791,53 @@ footer { padding-bottom: max(28px, env(safe-area-inset-bottom)); }
   const sticky = document.querySelector('.sticky-call');
   if (!sticky) return;
 
-  // 1) Measure the sticky height and reserve space only while visible
-  function setStickyHeight(){
-    document.documentElement.style.setProperty('--stickyH', sticky.offsetHeight + 'px');
-  }
-  function showSpace(enable){
-    document.body.classList.toggle('sticky-space', !!enable);
-  }
-  setStickyHeight();
-  showSpace(true);
-  window.addEventListener('resize', setStickyHeight);
-
-  // 2) Hide sticky when the footer is scrolled into view
+  // Hide sticky when the footer is scrolled into view
   const sentinel = document.getElementById('footer-sentinel');
   if (sentinel) {
     const io = new IntersectionObserver((entries) => {
       for (const e of entries) {
-        const nearFooter = e.isIntersecting;
-        sticky.classList.toggle('is-hidden', nearFooter);
-        // Remove the extra padding when hidden so there's no "big gap"
-        showSpace(!nearFooter);
+        sticky.classList.toggle('is-hidden', e.isIntersecting);
       }
-    }, { root: null, threshold: 0, rootMargin: '0px 0px -10% 0px' });
+    }, { root: null, threshold: 0, rootMargin: '0px 0px 60px 0px' });
     io.observe(sentinel);
   }
 
-  // 3) Optional: hide while user scrolls DOWN, show on scroll UP
+  // Hide while scrolling down, show on scroll up
   let lastY = window.scrollY;
-  let raf = null;
-  function onScroll(){
-    if (raf) return;
-    raf = requestAnimationFrame(() => {
-      const y = window.scrollY;
-      const goingDown = y > lastY + 6;
-      const goingUp   = y < lastY - 6;
-      if (goingDown) {
-        sticky.classList.add('is-hidden');
-        showSpace(false);
-      } else if (goingUp) {
-        sticky.classList.remove('is-hidden');
-        showSpace(true);
-      }
-      lastY = y;
-      raf = null;
-    });
+  let ticking = false;
+  
+  function update(){
+    const y = window.scrollY;
+    const delta = y - lastY;
+    
+    // Ignore tiny movements
+    if (Math.abs(delta) < 5) {
+      ticking = false;
+      return;
+    }
+    
+    if (delta > 0 && y > 100) {
+      // Scrolling down (and not at top)
+      sticky.classList.add('is-hidden');
+    } else if (delta < 0) {
+      // Scrolling up
+      sticky.classList.remove('is-hidden');
+    }
+    
+    lastY = y;
+    ticking = false;
   }
+  
+  function onScroll(){
+    if (!ticking) {
+      requestAnimationFrame(update);
+      ticking = true;
+    }
+  }
+  
   window.addEventListener('scroll', onScroll, { passive: true });
 })();
 </script>
-
 
 </body>
 </html>
