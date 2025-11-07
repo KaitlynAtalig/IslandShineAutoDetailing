@@ -2602,6 +2602,51 @@ footer img:hover {
   #gallery .gal-next { right: 8px; }
 }
 
+/* --- Fix Google & Yelp icons on mobile --- */
+.review-icons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.review-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #0a1228;
+  border: 1px solid #2a3a62;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.review-icons a:hover {
+  transform: scale(1.08);
+  filter: brightness(1.15);
+}
+
+.review-icons img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .review-icons a {
+    width: 44px;
+    height: 44px;
+  }
+  .review-icons img {
+    width: 24px;
+    height: 24px;
+  }
+}
 
 </style>
 
