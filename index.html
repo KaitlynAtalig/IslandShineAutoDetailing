@@ -1047,13 +1047,21 @@ html::before {
   animation: sparkleShift 2.1s linear infinite; /* faster shimmer */
 }
 
-/* continuous shimmer motion */
-@keyframes sparkleShift {
-  0%   { background-position: 0 0; }
-  25%  { background-position: 60px 30px; }
-  50%  { background-position: 120px 60px; }
-  75%  { background-position: 60px 90px; }
-  100% { background-position: 0 120px; }
+/* === Continuous shimmer overlay (frequent clean-car effect) === */
+html::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  mix-blend-mode: screen;
+  opacity: 0.18;
+  background: repeating-radial-gradient(
+    circle at 40% 80%,
+    rgba(255,255,255,.035) 0 1px,
+    transparent 1.4px
+  );
+  animation: sparkleShift 1.2s linear infinite; /* FASTER: was 2.1s, now 1.2s */
 }
 
 /* Smooth shimmer drift motion */
@@ -1230,6 +1238,161 @@ html { scroll-behavior: smooth; }
   font-family: var(--font, 'Poppins', 'Helvetica Neue', Arial, sans-serif);
   font-weight: 800;
   text-transform: uppercase;
+}
+.details-box{
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: #eaf0ff;
+  font-family: var(--font, 'Poppins','Helvetica Neue',Arial,sans-serif);
+}
+#pkg-compare > summary { color:#cbd6ef; font-size:13px; }
+#pkg-compare[open] > summary { color:#eaf0ff; }
+
+/* Booking details panel + compare cards: match site typography */
+.details-box,
+#pkg-compare-body .pkg-compare-card {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 12px;
+  padding: 12px;
+  color: #eaf0ff;
+  /* Use the same font stack as your form/site */
+  font-family: var(--font, 'Poppins','Helvetica Neue', Arial, sans-serif);
+  letter-spacing: 0.3px;
+}
+
+.details-box .dbox-title,
+#pkg-compare-body .pkg-compare-name {
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+#pkg-compare > summary {
+  color: #cbd6ef;
+  font-size: 13px;
+  font-weight: 800;
+  list-style: none;
+}
+#pkg-compare[open] > summary { color: #eaf0ff; }
+#pkg-compare > summary::-webkit-details-marker { display: none; }
+
+/* Use your existing checklist style for bullets */
+.details-box .dropdown-list,
+#pkg-compare-body .dropdown-list {
+  margin: 8px 0 0;
+  padding-left: 0;
+  list-style: none;
+  color: #cbd6e8;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.details-box .dropdown-list li,
+#pkg-compare-body .dropdown-list li {
+  position: relative;
+  padding-left: 24px;
+}
+.details-box .dropdown-list li::before,
+#pkg-compare-body .dropdown-list li::before {
+  content: "✓";
+  position: absolute; left: 0; top: 0;
+  font-weight: 900; font-size: 16px;
+  color: #5fa8ff;
+  text-shadow: 0 0 2px #79d2ff, 0 0 4px #5fa8ff;
+  animation: glowPulse 1.8s ease-in-out infinite alternate;
+}
+
+/* Compare cards grid spacing */
+#pkg-compare-body .pkg-compare-card { margin: 8px 0; }
+
+/* Booking: live package details + compare (matches form styling) */
+.details-box,
+#pkg-compare-body .pkg-compare-card{
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 12px;
+  padding: 12px;
+  color: #eaf0ff;
+  font-family: var(--font, 'Poppins','Helvetica Neue', Arial, sans-serif);
+  letter-spacing: .3px;
+}
+
+.details-box .dbox-title,
+#pkg-compare-body .pkg-compare-name{
+  font-weight: 800; margin-bottom: 6px;
+}
+
+/* “Compare all packages” details control */
+#pkg-compare > summary{
+  list-style: none; cursor: pointer; font-weight: 800; color:#cbd6ef;
+  font-family: var(--font, 'Poppins','Helvetica Neue', Arial, sans-serif);
+}
+#pkg-compare[open] > summary{ color:#eaf0ff; }
+#pkg-compare > summary::-webkit-details-marker{ display:none; }
+
+/* Use your existing checklist look for bullets */
+.details-box .dropdown-list,
+#pkg-compare-body .dropdown-list{
+  margin: 8px 0 0; padding-left: 0; list-style: none;
+  color: #cbd6e8; font-size: 14px; line-height: 1.6;
+}
+.details-box .dropdown-list li,
+#pkg-compare-body .dropdown-list li{ position:relative; padding-left:24px; }
+.details-box .dropdown-list li::before,
+#pkg-compare-body .dropdown-list li::before{
+  content:"✓"; position:absolute; left:0; top:0; font-weight:900; font-size:16px;
+  color:#5fa8ff; text-shadow:0 0 2px #79d2ff, 0 0 4px #5fa8ff;
+  animation: glowPulse 1.8s ease-in-out infinite alternate;
+}
+
+/* === Fix Compare Packages layout + style === */
+#pkg-compare {
+  grid-column: 1 / -1; /* spans full width */
+  margin-top: -6px;
+  margin-bottom: 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+
+#pkg-compare > summary {
+  font-weight: 700;
+  color: #f5d76e;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+#pkg-compare > summary:hover {
+  color: #ffe893;
+}
+
+#pkg-compare[open] > summary::after {
+  transform: rotate(90deg);
+}
+
+#pkg-compare-body {
+  margin-top: 10px;
+  background: rgba(10, 18, 40, 0.7);
+  border-radius: 8px;
+  padding: 10px 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.pkg-compare-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pkg-compare-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 
@@ -1779,7 +1942,14 @@ html { scroll-behavior: smooth; }
                 <option>Executive Works - $395</option>
               </select>
             </div>
+            <!-- LIVE package details (shows under the dropdown) -->
+            <div id="package-details" class="details-box"></div>
 
+            <!-- Compare all packages (accordion) -->
+            <details id="pkg-compare">
+              <summary>View or compare packages</summary>
+              <div id="pkg-compare-body"></div>
+            </details>
             <div class="date-time-grid">
               <div>
                 <label for="date">Preferred Date *</label>
@@ -2728,6 +2898,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* make sure footer text never tucks under rounded corners on iOS */
 footer { padding-bottom: max(28px, env(safe-area-inset-bottom)); }
+
+/* Fix spacing between package details and compare section */
+#package-details,
+#pkg-compare {
+  margin-top: 6px;
+  margin-bottom: 12px;
+}
+
+/* Hide the package details box when it's empty */
+#package-details:empty {
+  display: none;
+}
+
+/* --- Make all fields in the Schedule Your Appointment form evenly spaced --- */
+#booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* even space between all elements */
+}
+
+#booking-form .form-grid,
+#booking-form .date-time-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px; /* even spacing between columns and rows */
+}
+
+#booking-form label {
+  margin-bottom: 6px;
+  display: inline-block;
+}
+
+#booking-form input,
+#booking-form select,
+#booking-form textarea {
+  margin: 0;
+  width: 100%;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+/* Tighten the bottom margin for internal sections (like compare) */
+#pkg-compare,
+#package-details {
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
 </style>
 
 <div class="mobile-cta-bar" aria-label="Quick contact">
@@ -2846,5 +3064,222 @@ footer { padding-bottom: max(28px, env(safe-area-inset-bottom)); }
 })();
 </script>
 
+<script>
+(function(){
+  // === EXACT package contents pulled from your Services section ===
+  // Super Wash — Entry Clean
+  const PKG = {
+    "Super Wash - $75": [
+      "Exterior Wash",
+      "Interior Vacuum",
+      "Light Interior Wipe Down",
+      "Exterior & Interior Window Cleaning"
+    ],
+    // IShine — Deep Clean + Wax
+    "IShine - $165": [
+      "Exterior Wash",
+      "Undercarriage Cleaning",
+      "Door Jamb Cleaning",
+      "Deep Interior Vacuum",
+      "Exterior & Interior Windows",
+      "Vinyl/Leather UV Protectant",
+      "Wheels & Tires + Tire Shine",
+      "Carnauba Wax",
+      "<em>*Ceramic Spray additional $90.00</em>"
+    ],
+    // Deluxe — Ceramic Spray + Engine
+    "Deluxe - $200": [
+      "Exterior Wash",
+      "Undercarriage Cleaning",
+      "Door Jamb Cleaning",
+      "Deep Interior Vacuum",
+      "Exterior & Interior Windows",
+      "Vinyl/Leather UV Protectant",
+      "Wheels & Tires + Tire Shine",
+      "Engine Detailing",
+      "<em>*RENEW Ceramic Spray Coating (Hyper Gloss) by System-X</em>"
+    ],
+    // Executive Interior — Full Interior Refresh
+    "Executive Interior - $245": [
+      "Door Jamb Cleaning",
+      "Deep Interior Vacuum",
+      "Interior Window Cleaning",
+      "Vinyl/Leather UV Protectant",
+      "Interior Shampoo",
+      "Extraction & Steam Clean",
+      "<strong>Free Exterior Wash</strong>",
+      "<em>*We do not guarantee stains can be removed</em>"
+    ],
+    // Executive Works — Interior + Exterior Max
+    "Executive Works - $395": [
+      "Exterior Wash & Wax",
+      "Undercarriage Cleaning",
+      "Windows (Inside & Out)",
+      "Vinyl/Leather Cleaning",
+      "UV Protectant",
+      "Wheels & Tires + Tire Shine",
+      "Interior Shampoo",
+      "Extraction & Steam Clean",
+      "Engine Detailing",
+      "Anti-Bacterial Treatment",
+      "<em>*RENEW Ceramic Spray Coating (Hyper Gloss) by System-X</em>",
+      "<em>**We do not guarantee stains can be removed</em>"
+    ]
+  };
+
+  const select      = document.getElementById('service-select');
+  const detailsBox  = document.getElementById('package-details');
+  const compareBody = document.getElementById('pkg-compare-body');
+
+  if (!select || !detailsBox) return;
+
+  // Render the selected package details (uses same checklist look)
+  function renderSelected() {
+    const key   = select.options[select.selectedIndex]?.text || "";
+    const items = PKG[key];
+    detailsBox.innerHTML = items
+      ? `<div class="details-box-inner">
+           <div class="dbox-title">What's included</div>
+           <ul class="dropdown-list">
+             ${items.map(i=>`<li>${i}</li>`).join("")}
+           </ul>
+         </div>`
+      : "";
+  }
+
+  // Build "Compare all" once - simplified to just show package names
+  if (compareBody && !compareBody.dataset.ready) {
+    compareBody.innerHTML = `
+      <div style="color:#cbd6e8;font-size:14px;line-height:1.8;">
+        <div><strong style="color:#f5d76e;">Super Wash - $75</strong> • Entry clean</div>
+        <div><strong style="color:#f5d76e;">IShine - $165</strong> • Deep clean + wax</div>
+        <div><strong style="color:#f5d76e;">Deluxe - $200</strong> • Ceramic spray + engine</div>
+        <div><strong style="color:#f5d76e;">Executive Interior - $245</strong> • Full interior refresh</div>
+        <div><strong style="color:#f5d76e;">Executive Works - $395</strong> • Complete interior + exterior</div>
+      </div>
+    `;
+    compareBody.dataset.ready = "1";
+  }
+
+  // Update on change + on load
+  select.addEventListener('change', renderSelected);
+  renderSelected();
+})();
+</script>
+<script>
+(function(){
+  // 0) Find the select
+  const select = document.getElementById('service-select');
+  if (!select) return;
+
+  // 1) Ensure UI containers exist right after the select
+  function ensureNode(id, html) {
+    let el = document.getElementById(id);
+    if (!el) {
+      el = document.createElement('div');
+      el.id = id;
+      select.parentElement.insertAdjacentElement('afterend', el);
+      el.outerHTML = html;
+      el = document.getElementById(id);
+    }
+    return el;
+  }
+
+  const detailsBox = ensureNode(
+    'package-details',
+    '<div id="package-details" class="details-box"></div>'
+  );
+
+  const compareDetails = ensureNode(
+    'pkg-compare',
+    '<details id="pkg-compare">' +
+      '<summary>Compare all packages</summary>' +
+      '<div id="pkg-compare-body" style="margin-top:8px;"></div>' +
+    '</details>'
+  );
+  const compareBody = document.getElementById('pkg-compare-body');
+
+  // 2) EXACT package contents (mirrors your Services lists)
+  const PKG = {
+    "Super Wash - $75": [
+      "Exterior Wash",
+      "Interior Vacuum",
+      "Light Interior Wipe Down",
+      "Exterior & Interior Window Cleaning"
+    ],
+    "IShine - $165": [
+      "Exterior Wash",
+      "Undercarriage Cleaning",
+      "Door Jamb Cleaning",
+      "Deep Interior Vacuum",
+      "Exterior & Interior Windows",
+      "Vinyl/Leather UV Protectant",
+      "Wheels & Tires + Tire Shine",
+      "Carnauba Wax",
+      "<em>*Ceramic Spray additional $90.00</em>"
+    ],
+    "Deluxe - $200": [
+      "Exterior Wash",
+      "Undercarriage Cleaning",
+      "Door Jamb Cleaning",
+      "Deep Interior Vacuum",
+      "Exterior & Interior Windows",
+      "Vinyl/Leather UV Protectant",
+      "Wheels & Tires + Tire Shine",
+      "Engine Detailing",
+      "<em>*RENEW Ceramic Spray Coating (Hyper Gloss) by System-X</em>"
+    ],
+    "Executive Interior - $245": [
+      "Door Jamb Cleaning",
+      "Deep Interior Vacuum",
+      "Interior Window Cleaning",
+      "Vinyl/Leather UV Protectant",
+      "Interior Shampoo",
+      "Extraction & Steam Clean",
+      "<strong>Free Exterior Wash</strong>",
+      "<em>*We do not guarantee stains can be removed</em>"
+    ],
+    "Executive Works - $395": [
+      "Exterior Wash & Wax",
+      "Undercarriage Cleaning",
+      "Windows (Inside & Out)",
+      "Vinyl/Leather Cleaning",
+      "UV Protectant",
+      "Wheels & Tires + Tire Shine",
+      "Interior Shampoo",
+      "Extraction & Steam Clean",
+      "Engine Detailing",
+      "Anti-Bacterial Treatment",
+      "<em>*RENEW Ceramic Spray Coating (Hyper Gloss) by System-X</em>",
+      "<em>**We do not guarantee stains can be removed</em>"
+    ]
+  };
+
+  // 3) Render selected package panel
+  function renderSelected() {
+    const key = select.options[select.selectedIndex]?.text || "";
+    const items = PKG[key];
+    detailsBox.innerHTML = items
+      ? `<div class="dbox-title">What's included</div>
+         <ul class="dropdown-list">${items.map(i=>`<li>${i}</li>`).join("")}</ul>`
+      : "";
+  }
+
+  // 4) Build “Compare all” once
+  if (compareBody && !compareBody.dataset.ready) {
+    compareBody.innerHTML = Object.entries(PKG).map(([name, items]) => `
+      <div class="pkg-compare-card">
+        <div class="pkg-compare-name">${name}</div>
+        <ul class="dropdown-list">${items.map(i=>`<li>${i}</li>`).join("")}</ul>
+      </div>
+    `).join("");
+    compareBody.dataset.ready = "1";
+  }
+
+  // 5) Hook up events and initial render
+  select.addEventListener('change', renderSelected);
+  renderSelected();
+})();
+</script>
 </body>
 </html>
