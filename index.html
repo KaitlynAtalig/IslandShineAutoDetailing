@@ -6,6 +6,9 @@
 <title>Island Shine Auto Detailing – Protect. Polish. Perfect.</title>
 <meta name="description" content="Island Shine Auto Detailing in Tamuning, Guam — premium detailing, ceramic sprays, paint correction, and interior rejuvenation. Contact us on WhatsApp for a fast estimate." />
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Exo+2:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
 
 <style>
   :root{
@@ -992,7 +995,7 @@ body::before{
   background-position: 0 0, 60px 90px;
   opacity: .22;                  /* overall sparkle strength */
   filter: saturate(110%) brightness(110%);
-  animation: sparkleDrift 26s linear infinite;
+  animation: sparkleDrift 16s linear infinite;
 }
 
 /* Gentle “light sweep” for a clean, polished feel */
@@ -1012,7 +1015,7 @@ body::after{
   );
   transform: translateX(-100%);
   mix-blend-mode: screen;
-  animation: sweep 12s ease-in-out infinite;
+  animation: sweep 8s ease-in-out infinite;
 }
 
 /* Animations */
@@ -1044,7 +1047,7 @@ html::before {
     rgba(255,255,255,.035) 0 1px,
     transparent 1.4px
   );
-  animation: sparkleShift 2.1s linear infinite; /* faster shimmer */
+  animation: sparkleShift 0.9s linear infinite; /* faster shimmer */
 }
 
 /* === Continuous shimmer overlay (frequent clean-car effect) === */
@@ -2077,19 +2080,21 @@ html { scroll-behavior: smooth; }
               <div style="color:#cbd6e8;font-size:14px;line-height:1.6">Monday – Saturday<br>8:30 AM – 4:30 PM<br><em style="color:#cfe1ff">Appointments recommended</em></div>
             </div>
 
-            <div>
+           <div>
               <div style="font-weight:800;margin-bottom:12px;font-size:16px;color:#fff">Follow Our Work</div>
-              <div style="display:flex;gap:10px;flex-wrap:wrap">
-                <a href="https://www.instagram.com/islandshine_guam/" target="_blank" rel="noopener" style="padding:10px 16px;border-radius:10px;background:var(--surface-2);border:1px solid #243153;transition:background .2s;font-weight:600;font-size:14px;color:#e8eef7">Instagram</a>
-                <a href="https://www.facebook.com/islandshine" target="_blank" rel="noopener" style="padding:10px 16px;border-radius:10px;background:var(--surface-2);border:1px solid #243153;transition:background .2s;font-weight:600;font-size:14px;color:#e8eef7">Facebook</a>
-                <a href="https://www.tiktok.com/@islandshine" target="_blank" rel="noopener" style="padding:10px 16px;border-radius:10px;background:var(--surface-2);border:1px solid #243153;transition:background .2s;font-weight:600;font-size:14px;color:#e8eef7">TikTok</a>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                <a href="https://www.instagram.com/islandshineutodetailing"
+                  target="_blank" rel="noopener"
+                  class="social-icon">
+                  <i class="fa-brands fa-instagram"></i>
+                </a>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-  </main>
+  </main> 
 
  <footer>
   <div class="wrap">
@@ -2953,6 +2958,47 @@ main > section:last-of-type { padding-bottom: 16px !important; }
 footer { padding: 14px 0 !important; margin-top: 12px !important; }
 footer .wrap > div { margin-bottom: 4px; }
 footer .wrap > div:last-child { margin-bottom: 0; }
+
+.social-btn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  background: var(--surface-2, #10182c);
+  border: 1px solid #243153;
+  font-weight: 600;
+  font-size: 14px;
+  color: #e8eef7;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-btn:hover {
+  background: #f5d76e;
+  color: #0b1226;
+  box-shadow: 0 0 8px #f5d76e, 0 0 16px #f5d76e;
+  transform: scale(1.05);
+}
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--surface-2, #10182c);
+  border: 1px solid #243153;
+  color: #e8eef7;
+  font-size: 22px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  background: #f5d76e;
+  color: #0b1226;
+  box-shadow: 0 0 8px #f5d76e, 0 0 16px #f5d76e;
+  transform: scale(1.08);
+}
 
 </style>
 
